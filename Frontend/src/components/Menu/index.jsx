@@ -5,17 +5,18 @@ import { Link } from "react-router-dom";
 import { Container } from "./styles";
 import Switch from "react-switch";
 import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
 import { FaRegCircleQuestion } from "react-icons/fa6";
 import { Footer } from "../Footer";
-import { Input } from "../Input";
-import { SlMagnifier } from "react-icons/sl";
+import { InputSearch } from "../InputSearch";
 import { Twirl as Hamburger } from "hamburger-react";
+import { api } from "../../services/api";
 
 export function Menu({ isOpen, setOpen }) {
   const { signOut, user, updateUserRole, isAdmin } = useAuth();
 
   const [isGodMode, setIsGodMode] = useState(user.role === "admin");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleLinkClick = () => {
     setOpen(false);
@@ -32,6 +33,29 @@ export function Menu({ isOpen, setOpen }) {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const handleSearch = async () => {
+    try {
+      const response = await api.get(`/dishes/index?term=${searchTerm}`);
+      console.log(response); // Verifique o objeto de resposta
+
+      if (response.status !== 200) {
+        throw new Error("Erro ao buscar pratos.");
+      }
+
+      const data = response.data; // Acessa diretamente response.data
+
+      console.log(data); // Verifique os dados recebidos da API
+      setSearchResults(data);
+    } catch (error) {
+      console.error("Erro ao buscar pratos:", error);
+    }
+  };
   return (
     <Container
       as={motion.div}
@@ -55,15 +79,25 @@ export function Menu({ isOpen, setOpen }) {
         <h1>Menu</h1>
       </div>
       <main>
-        <div className="search">
-          <button className="searchButton">
-            <SlMagnifier size="2.4rem" title="Buscar" className="react-icons" />
-          </button>
-          <Input
-            type="search"
-            placeholder="Busque por pratos ou ingredientes"
-          />
-        </div>
+        <InputSearch
+          placeholder="Busque por pratos ou ingredientes"
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
+          onKeyDown={handleKeyDown}
+        />
+        {searchResults.length > 0 && (
+          <ul>
+            {searchResults.map((dish) => (
+              <li key={dish.id}>
+                <Link to={`/dishes/${dish.id}`} onClick={handleLinkClick}>
+                  {dish.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
         <Link
           to="/dishes/newdish"
           onClick={handleLinkClick}
@@ -71,11 +105,9 @@ export function Menu({ isOpen, setOpen }) {
         >
           Novo Prato
         </Link>
-        <span style={{ display: isAdmin ? "block" : "none" }}></span>
         <Link onClick={signOut} to="/">
           Sair
         </Link>
-        <span></span>
         <div className="godmode">
           GodMode
           <FaRegCircleQuestion
@@ -100,7 +132,6 @@ export function Menu({ isOpen, setOpen }) {
             }}
           />
         </div>
-        <span></span>
       </main>
       <Footer />
     </Container>
