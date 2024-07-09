@@ -35,7 +35,7 @@ function AuthProvider({ children }) {
 
   async function getAllDishes() {
     try {
-      const response = await api.get("/dishes");
+      const response = await api.get("/dishes/index");
       return response.data;
     } catch {
       alert("Nao foi possivel carregar os pratos");

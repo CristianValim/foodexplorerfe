@@ -9,7 +9,7 @@ export function Button({ name, img, onClick, toDelete }) {
         style={{
           display: img ? "" : "none",
         }}
-      />{" "}
+      />
       {name}
     </Container>
   );

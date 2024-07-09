@@ -3,6 +3,7 @@ import { Container } from "./styles";
 import { Menu } from "../Menu";
 import { AnimatePresence } from "framer-motion";
 import { SlMagnifier } from "react-icons/sl";
+import { useNavigate } from "react-router-dom";
 
 import logo from "../../assets/icons/logo.svg";
 import cart from "../../assets/icons/Receipt.svg";
@@ -19,7 +20,12 @@ export function Header({ isAdmin }) {
 
   const { signOut } = useAuth();
 
-  const handleMenuToggle = () => {
+  const navigate = useNavigate();
+  function handleNavigate() {
+    navigate("/");
+  }
+
+  function handleMenuToggle() {
     if (canToggleMenu) {
       setOpen(!isOpen);
       setCanToggleMenu(false);
@@ -27,7 +33,7 @@ export function Header({ isAdmin }) {
         setCanToggleMenu(true);
       }, 1000);
     }
-  };
+  }
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -73,10 +79,10 @@ export function Header({ isAdmin }) {
           {isOpen && <Menu isOpen={isOpen} setOpen={setOpen} />}
         </AnimatePresence>
       </div>
-      <div className="logo-wrapp">
+      <button className="logo-wrapp" onClick={handleNavigate}>
         <img className="logo" src={logo} alt="food explorer" />
         <span className="admin">{isAdmin ? "admin" : ""}</span>
-      </div>
+      </button>
       <form>
         <button className="searchButton">
           <SlMagnifier size="2.4rem" title="Buscar" className="react-icons" />

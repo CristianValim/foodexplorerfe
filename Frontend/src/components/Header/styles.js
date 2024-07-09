@@ -18,7 +18,6 @@ export const Container = styled.header`
     font-size: 1.2rem;
     color: ${({ theme }) => theme.COLORS.CAKE_200};
 
-    pointer-events: none;
     .logo {
       max-width: 16rem;
     }

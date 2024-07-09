@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Select_down from "../../assets/icons/Select_down.svg"
+import Select_down from "../../assets/icons/Select_down.svg";
 
 export const Container = styled.div`
   font-family: ${({ theme }) => theme.FONTS.SECONDARY};
