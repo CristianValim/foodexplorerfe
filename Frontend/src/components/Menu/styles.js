@@ -6,6 +6,7 @@ export const Container = styled.section`
   z-index: 1000;
   inset: 0;
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
+  font-size: 2.4rem;
 
   .menu-header {
     display: flex;
@@ -19,24 +20,24 @@ export const Container = styled.section`
     margin-bottom: auto;
   }
 
-  .search {
-    position: relative;
+  main {
     display: grid;
     margin: 3.6rem 2.8rem;
-    font-size: 2.4rem;
+  }
+
+  .search {
+    position: relative;
+    margin-bottom: 3.6rem;
 
     .searchButton {
-      position: relative;
+      position: absolute;
+      left: 1.4rem;
       top: 50%;
       transform: translateY(-50%);
-      left: 1.4rem;
-      background: none;
-      border: none;
       cursor: pointer;
     }
-
     input {
-      margin-bottom: 3.6rem;
+      margin-bottom: 0;
       padding-left: 5.2rem;
     }
   }
@@ -53,7 +54,11 @@ export const Container = styled.section`
 
   .godmode {
     display: flex;
-    justify-content: space-between;
+    gap: 1rem;
     align-items: center;
+
+    .switch {
+      margin-left: auto;
+    }
   }
 `;
