@@ -19,27 +19,12 @@ export const Container = styled.section`
     font-size: 2.1rem;
     margin-bottom: auto;
   }
-
+  .search-container {
+    margin-bottom: 3.6rem;
+  }
   main {
     display: grid;
     margin: 3.6rem 2.8rem;
-  }
-
-  .search {
-    position: relative;
-    margin-bottom: 3.6rem;
-
-    .searchButton {
-      position: absolute;
-      left: 1.4rem;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-    }
-    input {
-      margin-bottom: 0;
-      padding-left: 5.2rem;
-    }
   }
 
   span {

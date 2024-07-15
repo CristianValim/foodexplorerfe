@@ -82,8 +82,30 @@ export const Container = styled.div`
     gap: 3.2rem;
   }
 
-  .react-confirm-alert {
-    font-size: 2.4rem;
+  @media (min-width: 600px){
+    form {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+
+      .tagsLabel {
+        grid-column: span 2;
+
+        .tagsSection {
+          padding: 0.8rem;
+        }
+      }
+
+      .description {
+        grid-column: span 3;
+      }
+
+      .buttons {
+        grid-column-start: 3;
+        width: 33rem;
+        margin-left: auto;
+      }
+    }
   }
 `;
 

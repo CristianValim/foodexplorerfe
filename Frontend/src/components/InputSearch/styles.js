@@ -1,11 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 3.6rem;
   position: relative;
+  z-index: 9999;
 
   .searchIcon {
     position: absolute;
@@ -17,9 +14,10 @@ export const Container = styled.div`
   }
 
   input {
+    
     width: 100%;
     padding: 1.6rem 4.4rem 1.6rem 5.2rem;
-    background-color: ${({ theme }) => theme.COLORS.DARK_800};
+    background-color: ${({ theme }) => theme.COLORS.DARK_900};
     border: none;
     border-radius: 0.8rem;
     color: ${({ theme }) => theme.COLORS.LIGHT_500};
@@ -28,5 +26,30 @@ export const Container = styled.div`
     &::placeholder {
       color: ${({ theme }) => theme.COLORS.LIGHT_500};
     }
+  }
+
+  .search-results {
+    position: absolute;
+    top: 4.5rem;
+    left: 0;
+    right: 0;
+    max-height: 20rem;
+    overflow-y: auto;
+    background-color: ${({ theme }) => theme.COLORS.DARK_800};
+    border-radius: 0 0 0.5rem 0.5rem;
+    z-index: 1000;
+
+    &:focus {
+      border: 1px solid white;
+    }
+  }
+
+  .search-results li {
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+
+  @media (min-width: 600px) {
+      font-size: 2.4rem;
   }
 `;

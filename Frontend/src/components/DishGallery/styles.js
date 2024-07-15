@@ -36,8 +36,8 @@ export const GradientOverlay = styled.div`
   background: linear-gradient(
     to right,
     #00070A 0%,
-    rgba(255, 255, 255, 0) 20%,
-    rgba(255, 255, 255, 0) 80%,
+    rgba(255, 255, 255, 0) 10%,
+    rgba(255, 255, 255, 0) 90%,
     #00070A 100%
   );
   z-index: 10;

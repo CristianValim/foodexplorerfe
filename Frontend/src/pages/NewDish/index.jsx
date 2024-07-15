@@ -5,6 +5,7 @@ import arrowBack from "../../assets/icons/CaretLeft.svg";
 
 import { toast } from "react-toastify";
 import { ValidationErrorToast } from "../../components/ValidationErrorToast";
+import { FileInput } from "../../components/FileInput";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Tags } from "../../components/Tags";
@@ -16,7 +17,7 @@ export function NewDish() {
   const [image, setImage] = useState(null);
   const [imageName, setImageName] = useState("");
   const [name, setName] = useState("");
-  const [category, setCategory] = useState("Entradas");
+  const [category, setCategory] = useState("Refeições");
   const [tags, setTags] = useState([]);
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -31,7 +32,7 @@ export function NewDish() {
     setImage(null);
     setImageName("");
     setName("");
-    setCategory("Prato Principal");
+    setCategory("Refeições");
     setTags([]);
     setPrice("");
     setDescription("");
@@ -126,15 +127,14 @@ export function NewDish() {
       <h1>Novo prato</h1>
 
       <form onSubmit={(e) => e.preventDefault()}>
-        <Input
-          type="file"
+        <FileInput
           name={imageName ? imageName : "Selecione uma imagem"}
           onChange={handleChangeImage}
         />
 
         <Input
           type="text"
-          name="name"
+          name="Nome"
           placeholder="Ex: Salada Caesar"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -153,8 +153,7 @@ export function NewDish() {
             onKeyDown={handleKeyDown}
             ref={categoryRef}
           >
-            <option value="Entradas">Entradas</option>
-            <option value="Prato principal">Prato principal</option>
+            <option value="Refeições">Refeições</option>
             <option value="Bebidas">Bebidas</option>
             <option value="Sobremesa">Sobremesa</option>
           </select>
@@ -194,7 +193,7 @@ export function NewDish() {
           <textarea
             id="description"
             name="description"
-            rows="4"
+            rows="7"
             cols="50"
             placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
             value={description}

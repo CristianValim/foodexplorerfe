@@ -1,29 +1,38 @@
 import { useEffect, useState } from "react";
 import { Container } from "./styles";
+import { useAuth } from "../../hooks/auth";
 import { Menu } from "../Menu";
 import { AnimatePresence } from "framer-motion";
-import { SlMagnifier } from "react-icons/sl";
-import { useNavigate } from "react-router-dom";
-
+import Switch from "react-switch";
+import { Tooltip } from "react-tooltip";
+import { FaRegCircleQuestion } from "react-icons/fa6";
+import { useIsMobile } from "../../hooks/useIsMobile";
 import logo from "../../assets/icons/logo.svg";
 import cart from "../../assets/icons/Receipt.svg";
 import signout from "../../assets/icons/SignOut.svg";
-
+import { Link } from "react-router-dom";
 import { Twirl as Hamburger } from "hamburger-react";
-import { Input } from "../Input";
-import { useAuth } from "../../hooks/auth";
+import { InputSearch } from "../InputSearch";
+import { useCart } from "../../contexts/CartContext";
 
 export function Header({ isAdmin }) {
+  const { updateUserRole, signOut, user } = useAuth();
   const [isOpen, setOpen] = useState(false);
-  const [cartQuantity, setCartQuantity] = useState("0");
+  const { getCartItemCount } = useCart();
   const [canToggleMenu, setCanToggleMenu] = useState(true);
 
-  const { signOut } = useAuth();
+  const [isGodMode, setIsGodMode] = useState(user.role === "admin");
+  const isMobile = useIsMobile();
+  const handleGodModeChange = async (checked) => {
+    setIsGodMode(checked);
+    const newRole = checked ? "admin" : "user";
 
-  const navigate = useNavigate();
-  function handleNavigate() {
-    navigate("/");
-  }
+    try {
+      await updateUserRole(newRole);
+    } catch (error) {
+      console.error("Erro ao atualizar papel:", error);
+    }
+  };
 
   function handleMenuToggle() {
     if (canToggleMenu) {
@@ -79,30 +88,68 @@ export function Header({ isAdmin }) {
           {isOpen && <Menu isOpen={isOpen} setOpen={setOpen} />}
         </AnimatePresence>
       </div>
-      <button className="logo-wrapp" onClick={handleNavigate}>
-        <img className="logo" src={logo} alt="food explorer" />
-        <span className="admin">{isAdmin ? "admin" : ""}</span>
-      </button>
-      <form>
-        <button className="searchButton">
-          <SlMagnifier size="2.4rem" title="Buscar" className="react-icons" />
+      <Link to="/" style={{ margin: "auto" }}>
+        <button className="logo-wrapp">
+          <img className="logo" src={logo} alt="food explorer" />
+          <span
+            className="admin"
+            style={{ display: isAdmin ? "block" : "none" }}
+          >
+            admin
+          </span>
         </button>
-        <Input
-          className="searchBar"
-          type="search"
-          placeholder="Busque por pratos ou ingredientes"
-        />
-      </form>
-      <button className="cart" style={{ display: isAdmin ? "none" : "block" }}>
+      </Link>
+      <div
+        className="search-container"
+        style={{ display: isMobile ? "none" : "block" }}
+      >
+        <InputSearch />
+      </div>
+      <button className="cart" style={{ display: isAdmin ? "none" : "flex" }}>
         <img src={cart} />
         <span className="desktop">Pedidos</span>
-        <div className="badge">{cartQuantity}</div>
+        <div className="badge">
+          {isMobile ? "" : "("}
+          {getCartItemCount()}
+          {isMobile ? "" : ")"}
+        </div>
       </button>
+      <Link
+        className="newDish"
+        to="/dishes/newdish"
+        style={{ display: isMobile ? "none" : isAdmin ? "block" : "none" }}
+      >
+        Novo prato
+      </Link>
 
       <div className="signout">
         <button onClick={signOut}>
           <img src={signout} />
         </button>
+      </div>
+      <div className="godmode" style={{ display: isMobile ? "none" : "flex" }}>
+        <span>GodMode</span>
+        <FaRegCircleQuestion
+          size={"2rem"}
+          data-tooltip-id="my-tooltip"
+          data-tooltip-content="Godmode altera o estado entre usuário comum e administrador."
+        />
+        <Switch
+          className="switch"
+          onChange={handleGodModeChange}
+          checked={isGodMode}
+          uncheckedIcon={false}
+          checkedIcon={false}
+        />
+        <Tooltip
+          id="my-tooltip"
+          place="right"
+          style={{
+            fontSize: "1.2rem",
+            maxWidth: "20rem",
+            textAlign: "center",
+          }}
+        />
       </div>
     </Container>
   );

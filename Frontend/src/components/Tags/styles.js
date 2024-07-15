@@ -27,4 +27,10 @@ export const Container = styled.div`
       outline: none;
     }
   }
+
+  @media (min-width: 600px){
+    input {
+      padding: .8rem 1.5rem;
+  }
+  }
 `;

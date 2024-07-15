@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const Container = styled.footer`
   background-color: ${({ theme }) => theme.COLORS.DARK_700};
   padding: 3rem;
-
-  height: 10dvh;
   text-align: center;
   position: relative;
   bottom: 0;

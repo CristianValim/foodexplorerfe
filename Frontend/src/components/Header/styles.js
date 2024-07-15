@@ -12,24 +12,25 @@ export const Container = styled.header`
   .logo-wrapp {
     display: flex;
     align-items: center;
-    margin-inline: auto;
     gap: 0.8rem;
     font-family: ${({ theme }) => theme.FONTS.SECONDARY};
     font-size: 1.2rem;
     color: ${({ theme }) => theme.COLORS.CAKE_200};
-
     .logo {
       max-width: 16rem;
     }
   }
 
-  .cart {
+  .cart,
+  .newDish {
     background-color: ${({ theme }) => theme.COLORS.DARK_700};
     min-width: 4.8rem;
     min-height: 4.8rem;
     border-radius: 0.5rem;
     position: relative;
-
+    place-content: center;
+    font-size: 1.4rem;
+    text-align: center;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
@@ -48,13 +49,21 @@ export const Container = styled.header`
       height: 2rem;
       border-radius: 50%;
       position: absolute;
-      top: .3rem;
-      right: 1rem;
+      right: 0;
       background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
     }
   }
 
-  form,
+  .godmode {
+    gap: 1rem;
+    align-items: center;
+    font-size: 2.4rem;
+
+    span {
+      pointer-events: none;
+    }
+  }
+
   .desktop,
   .signout {
     display: none;
@@ -72,28 +81,25 @@ export const Container = styled.header`
       display: none;
     }
 
-    form {
-      display: block;
-      position: relative;
-      width: 70%;
-
-      button {
-        position: absolute;
-        bottom: 50%;
-        transform: translateY(50%);
-        left: 20%;
+    .logo-wrapp {
+      flex-direction: column;
+      .admin {
+        margin-left: auto;
       }
-
-      .textInput {
-        input {
-          width: 100%;
-          padding-left: 25%;
-        }
+      .logo {
+        max-width: 20rem;
       }
     }
 
-    .cart {
+    .search-container {
+      display: block;
+      width: 100%;
+    }
+
+    .cart,
+    .newDish {
       background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+      border-radius: 0.5rem;
       display: flex;
       justify-content: center;
       align-items: center;

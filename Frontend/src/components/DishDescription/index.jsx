@@ -1,24 +1,37 @@
+// src/components/DishDescription.js
 import { Container, LoadingContainer } from "./styles";
 import { QuantitySelector } from "../QuantitySelector";
 import { Button } from "../Button";
 import arrowBack from "../../assets/icons/CaretLeft.svg";
 import receipt from "../../assets/icons/Receipt.svg";
 import { AnimatePresence, motion } from "framer-motion";
-import { useGetBack } from "../../hooks/useGetBack";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { api } from "../../services/api";
 import { useAuth } from "../../hooks/auth";
 import BounceLoader from "react-spinners/BounceLoader";
+import { useCart } from "../../contexts/CartContext";
 
 export function DishDescription() {
   const { id } = useParams();
   const [dish, setDish] = useState(null);
-  const { isAdmin } = useAuth;
+  const [quantity, setQuantity] = useState(1);
+  const { isAdmin } = useAuth();
   const navigate = useNavigate();
+  const { addToCart } = useCart();
+
+  function handleNavigateEdit() {
+    navigate(`/dishes/editdish/${id}`);
+  }
 
   function handleNavigate() {
-    navigate(`/dishes/editdish/${id}`);
+    navigate("/");
+  }
+
+  function handleAddToCart() {
+    if (dish) {
+      addToCart({ ...dish, quantity });
+    }
   }
 
   useEffect(() => {
@@ -59,7 +72,7 @@ export function DishDescription() {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <button onClick={useGetBack} className="getBack">
+        <button onClick={handleNavigate} className="getBack">
           <img src={arrowBack} alt="Voltar" /> voltar
         </button>
         <div className="description">
@@ -80,17 +93,21 @@ export function DishDescription() {
             </ul>
             <div
               className="place-order"
-              style={{ display: isAdmin ? "block" : "none" }}
+              style={{ display: isAdmin ? "none" : "flex" }}
             >
-              <QuantitySelector />
-              <Button img={receipt} name={`pedir ${dish.price}`} />
+              <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+              <Button
+                img={receipt}
+                name={`pedir ${dish.price}`}
+                onClick={handleAddToCart}
+              />
             </div>
 
             <div
               className="edit-dish"
-              style={{ display: isAdmin ? "none" : "block" }}
+              style={{ display: isAdmin ? "block" : "none" }}
             >
-              <Button onClick={handleNavigate} name="Editar prato" />
+              <Button onClick={handleNavigateEdit} name="Editar prato" isAdmin={isAdmin} />
             </div>
           </div>
         </div>

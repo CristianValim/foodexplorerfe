@@ -5,7 +5,8 @@ export const Container = styled.div`
   padding: 3.6rem 10% 5.5rem;
   font-size: 1.4rem;
   min-height: 79dvh;
-
+  display: grid;
+  place-content: center;
   .getBack {
     img {
       width: 3.2rem;
@@ -25,21 +26,22 @@ export const Container = styled.div`
   h1 {
     font-size: 2.4rem;
     margin-bottom: 2.4rem;
+    font-weight: 500;
+    text-align: center;
   }
 
-  p,
-  h1 {
+  p {
+    font-weight: 300;
     text-align: center;
-    }
+  }
 
   .tags {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 2.5rem;
-  margin-block: 2.4rem 4.8rem;
+    margin-block: 2.4rem 4.8rem;
     li {
-    flex-grow: ;
       background-color: ${({ theme }) => theme.COLORS.DARK_1000};
       padding: 0.4rem 0.8rem;
       border-radius: 0.5rem;
@@ -47,8 +49,7 @@ export const Container = styled.div`
   }
 
   .place-order {
-    display: flex;
-    gap: 1.6rem;
+    justify-content: space-between;
 
     button {
       font-size: 1.2rem;
@@ -60,7 +61,13 @@ export const Container = styled.div`
 
     .dishPicture {
       margin: 4rem 5rem 0 0;
-      max-width: 39rem;
+      max-width: 50rem;
+      width: 100%;
+    }
+
+    .place-order {
+      justify-content: start;
+      gap: 3.3rem;
     }
 
     .description {
@@ -85,10 +92,14 @@ export const Container = styled.div`
       .text p {
         font-size: 2.4rem;
       }
+    }
+  }
 
-      .place-order {
-        margin-top: 4.8rem;
-      }
+  .edit-dish button {
+    max-width: 15rem;
+
+    @media (max-width: 600px) {
+      margin: ${({ isAdmin }) => (isAdmin ? "0" : "auto")};
     }
   }
 `;

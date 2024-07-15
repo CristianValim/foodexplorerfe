@@ -41,7 +41,6 @@ body {
 /* responsive images/videos */
 img,
 picture,
-svg,
 video {
   display: block;
   max-width: 100%;

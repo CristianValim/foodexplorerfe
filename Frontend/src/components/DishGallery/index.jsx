@@ -5,6 +5,7 @@ import { useIsMobile } from "../../hooks/useIsMobile";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useAuth } from "../../hooks/auth";
 import { api } from "../../services/api";
+import "swiper/css/navigation";
 import "swiper/css";
 import "swiper/css/effect-fade";
 
@@ -24,8 +25,7 @@ export function DishGallery() {
   }, [getAllDishes]);
 
   const customCategoryOrder = [
-    "Entradas",
-    "Prato Principal",
+    "Refeições",
     "Bebidas",
     "Sobremesa",
   ];
@@ -49,9 +49,10 @@ export function DishGallery() {
           <h2 className="category">{category}</h2>
           <div className="swiper-container">
             <Swiper
-              slidesPerView={isMobile ? 2 : 4}
+              slidesPerView={isMobile ? 2 : 3.5}
               loop={true}
-              spaceBetween={20}
+              spaceBetween='50'
+
             >
               {categorizedDishes[category].map((dish) => (
                 <SwiperSlide key={dish.id}>

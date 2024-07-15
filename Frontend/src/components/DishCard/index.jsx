@@ -4,18 +4,22 @@ import { Container } from "./styles";
 import { Button } from "../Button";
 import { QuantitySelector } from "../QuantitySelector";
 
+import debounce from "lodash.debounce";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import heart from "../../assets/icons/Heart.svg";
 import heartFilled from "../../assets/icons/HeartFilled.svg";
 import editPencil from "../../assets/icons/Pencil.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
+import { useCart } from "../../contexts/CartContext";
 
 export function DishCard({ id, image, description, price, dish }) {
   const [isActive, setIsActive] = useState(false);
+  const [quantity, setQuantity] = useState(1);
   const { isAdmin } = useAuth();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { addToCart } = useCart();
 
   function handleFavorite() {
     setIsActive(!isActive);
@@ -23,6 +27,14 @@ export function DishCard({ id, image, description, price, dish }) {
 
   function handleNavigate() {
     navigate(`/dishes/editdish/${id}`);
+  }
+
+  const debounceAddToCart = debounce((params) => {
+    addToCart(params);
+  }, 50);
+
+  function handleAddToCart() {
+    debounceAddToCart({ id, image, description, price, dish, quantity });
   }
 
   return (
@@ -64,12 +76,9 @@ export function DishCard({ id, image, description, price, dish }) {
         <p>R$ {price}</p>
       </div>
 
-      <div
-        className="quantity-include"
-        style={{ display: isAdmin ? "none" : "block" }}
-      >
-        <QuantitySelector />
-        <Button className="include-button" name="incluir" />
+      <div className="quantity-include" style={{display: isAdmin ? "none": "flex"}}>
+        <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+        <Button name="Incluir" onClick={handleAddToCart} />
       </div>
     </Container>
   );

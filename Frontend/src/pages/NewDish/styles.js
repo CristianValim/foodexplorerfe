@@ -21,7 +21,6 @@ export const Container = styled.div`
 
   h1 {
     font-family: ${({ theme }) => theme.FONTS.MAIN};
-
     margin-block: 2.4rem;
     font-size: 3.2rem;
   }
@@ -77,4 +76,29 @@ export const Container = styled.div`
       gap: 1.6rem;
     }
   }
+
+  @media (min-width: 600px) {
+    form {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+
+      .tagsLabel {
+        grid-column: span 2;
+
+        .tagsSection {
+          padding: 0.8rem;
+        }
+      }
+
+      .description {
+        grid-column: span 3;
+      }
+
+      button {
+        grid-column-start: 3;
+        max-width: 18rem;
+        margin-left: auto;
+      }
+    }
 `;

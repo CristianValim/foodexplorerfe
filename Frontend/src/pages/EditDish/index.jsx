@@ -8,6 +8,7 @@ import arrowBack from "../../assets/icons/CaretLeft.svg";
 import { toast } from "react-toastify";
 import { ValidationErrorToast } from "../../components/ValidationErrorToast";
 import { Input } from "../../components/Input";
+import { FileInput } from "../../components/FileInput";
 import { Button } from "../../components/Button";
 import { Tags } from "../../components/Tags";
 import CurrencyInput from "react-currency-input-field";
@@ -23,7 +24,7 @@ export function EditDish() {
   const [image, setImage] = useState(null);
   const [imageName, setImageName] = useState("");
   const [name, setName] = useState("");
-  const [category, setCategory] = useState("Entradas");
+  const [category, setCategory] = useState("Refeições");
   const [tags, setTags] = useState([]);
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -172,8 +173,7 @@ export function EditDish() {
       <h1>Editar prato</h1>
 
       <form onSubmit={(e) => e.preventDefault()}>
-        <Input
-          type="file"
+        <FileInput
           name={imageName ? imageName : "Selecione uma imagem para alterá-la"}
           onChange={handleChangeImage}
         />
@@ -199,8 +199,7 @@ export function EditDish() {
             onKeyDown={handleKeyDown}
             ref={categoryRef}
           >
-            <option value="Entradas">Entradas</option>
-            <option value="Prato principal">Prato principal</option>
+            <option value="Refeições">Refeições</option>
             <option value="Bebidas">Bebidas</option>
             <option value="Sobremesa">Sobremesa</option>
           </select>
@@ -240,7 +239,7 @@ export function EditDish() {
           <textarea
             id="description"
             name="description"
-            rows="4"
+            rows="7"
             cols="50"
             placeholder={description}
             value={description}
