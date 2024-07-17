@@ -20,12 +20,8 @@ export const Container = styled.div`
     background-color: transparent;
     top: 0;
     right: 0;
-
     width: 4.8rem;
     height: 4.8rem;
-
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
     transition: all 0.3s;
 
     img {
@@ -42,15 +38,17 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 1.2rem;
-
     text-align: center;
+
     figcaption {
       white-space: nowrap;
     }
+
     img {
       max-width: 9rem;
     }
   }
+
   .description {
     font-size: 1.4rem;
     overflow-y: scroll;
@@ -78,19 +76,24 @@ export const Container = styled.div`
     height: 46rem;
     font-size: 2.4rem;
     margin-bottom: 5rem;
+
     figure {
       gap: 1.5rem;
+
       img {
         max-width: 17rem;
       }
+
       figcaption {
         white-space: wrap;
         max-width: 25rem;
       }
+
       .description {
         max-width: 25rem;
       }
     }
+
     .price p {
       font-size: 3.2rem;
     }

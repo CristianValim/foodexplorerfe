@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import upload from "../../assets/icons/Upload.svg";
+import uploadIcon from "../../assets/icons/Upload.svg";
 
+// Container principal estilizado usando styled-components
 export const Container = styled.div`
   color: ${({ theme }) => theme.COLORS.LIGHT_400};
   font-family: ${({ theme }) => theme.FONTS.SECONDARY};
@@ -12,14 +13,14 @@ export const Container = styled.div`
   border-radius: 0.8rem;
   position: relative;
 
+  // Estilo para o label do input de arquivo
   .fileInputLabel {
-    color: ${({ theme }) => theme.COLORS.LIGHT_500};
     padding: 1.6rem 1.4rem;
     margin-bottom: 2.4rem;
     border: none;
     border-radius: 0.8rem;
     background-color: ${({ theme }) => theme.COLORS.DARK_800};
-    background-image: url(${upload});
+    background-image: url(${uploadIcon});
     background-repeat: no-repeat;
     background-position: 3rem 50%;
     padding-left: 6.5rem;
@@ -30,12 +31,18 @@ export const Container = styled.div`
     cursor: pointer;
     position: relative;
     display: block;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.COLORS.DARK_900};
+    }
   }
 
+  // Estilo para o input de arquivo, escondido visualmente
   .fileInput {
     display: none;
   }
 
+  // Estilo para o preview da imagem selecionada
   .image-preview {
     position: absolute;
     top: calc(100% - 2rem);

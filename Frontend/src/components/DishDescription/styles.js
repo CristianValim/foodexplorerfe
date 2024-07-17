@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+// Estilização do contêiner principal
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
   padding: 3.6rem 10% 5.5rem;
@@ -7,22 +8,25 @@ export const Container = styled.div`
   min-height: 79dvh;
   display: grid;
   place-content: center;
+
+  // Estilização do botão de voltar
   .getBack {
     img {
       width: 3.2rem;
       height: 3.2rem;
     }
-
     font-size: 2.4rem;
     display: flex;
     align-items: center;
   }
 
+  // Estilização da imagem do prato
   .dishPicture {
     padding-inline: 2.6rem;
     margin: 1.6rem auto;
   }
 
+  // Estilização do título (nome do prato)
   h1 {
     font-size: 2.4rem;
     margin-bottom: 2.4rem;
@@ -30,11 +34,13 @@ export const Container = styled.div`
     text-align: center;
   }
 
+  // Estilização da descrição do prato
   p {
     font-weight: 300;
     text-align: center;
   }
 
+  // Estilização das tags do prato
   .tags {
     display: flex;
     flex-wrap: wrap;
@@ -48,6 +54,7 @@ export const Container = styled.div`
     }
   }
 
+  // Estilização do contêiner de fazer pedido
   .place-order {
     justify-content: space-between;
 
@@ -56,6 +63,8 @@ export const Container = styled.div`
       max-width: 16rem;
     }
   }
+
+  // Estilos específicos para telas maiores
   @media (min-width: 600px) {
     padding: 2.4rem 12rem 15rem;
 
@@ -95,6 +104,7 @@ export const Container = styled.div`
     }
   }
 
+  // Estilização do botão de editar prato
   .edit-dish button {
     max-width: 15rem;
 
@@ -104,6 +114,7 @@ export const Container = styled.div`
   }
 `;
 
+// Estilização do contêiner de carregamento
 export const LoadingContainer = styled.div`
   height: 79dvh;
   display: grid;

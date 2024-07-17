@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+// Estilização do componente Footer usando styled-components
 export const Container = styled.footer`
   background-color: ${({ theme }) => theme.COLORS.DARK_700};
   padding: 3rem;
@@ -13,23 +14,23 @@ export const Container = styled.footer`
     align-items: center;
 
     p {
-        font-size: 1.2rem;
+      font-size: 1.2rem;
     }
 
     p:first-child {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: .65rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.65rem;
 
-        font-family: ${({ theme }) => theme.FONTS.SECONDARY};
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: ${({theme}) => theme.COLORS.LIGHT_700};
+      font-family: ${({ theme }) => theme.FONTS.SECONDARY};
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: ${({ theme }) => theme.COLORS.LIGHT_700};
 
-        img {
-          max-width: 2rem;
-        }
+      img {
+        max-width: 2rem;
+      }
     }
 
     &:hover {

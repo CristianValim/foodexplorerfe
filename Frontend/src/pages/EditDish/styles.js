@@ -3,7 +3,7 @@ import Select_down from "../../assets/icons/Select_down.svg";
 
 export const Container = styled.div`
   font-family: ${({ theme }) => theme.FONTS.SECONDARY};
-
+  min-height: 85dvh;
   padding-bottom: 5.3rem;
   margin-inline: 10%;
 

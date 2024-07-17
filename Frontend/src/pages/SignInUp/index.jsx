@@ -18,8 +18,7 @@ export function SignInUp({ mode }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [redirect, setRedirect] = useState(false); // Estado para controlar o redirecionamento
-
+  const [redirect, setRedirect] = useState(false);
   useEffect(() => {
     setAuthMode(mode === "signup");
   }, [mode]);
@@ -47,7 +46,7 @@ export function SignInUp({ mode }) {
       .post("/users", { name, email, password })
       .then(() => {
         toast.success("Usuário cadastrado com sucesso");
-        setRedirect(true); // Atualiza o estado para redirecionar
+        setRedirect(true);
       })
       .catch((error) => {
         if (error.response) {
@@ -64,7 +63,6 @@ export function SignInUp({ mode }) {
     }
   };
 
-  // Redirecionamento condicional
   if (redirect) {
     return <Navigate to="/" replace />;
   }
@@ -109,6 +107,7 @@ export function SignInUp({ mode }) {
               type="password"
               name="Senha"
               placeholder="No mínimo 6 caracteres"
+              minlength="6"
               onChange={(e) => setPassword(e.target.value)}
               onKeyDown={handleKeyDown}
             />

@@ -1,19 +1,27 @@
+// 1. Bibliotecas externas
 import { useState, useEffect } from "react";
-import { Container, GradientOverlay } from "./styles";
-import { DishCard } from "../DishCard";
-import { useIsMobile } from "../../hooks/useIsMobile";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useAuth } from "../../hooks/auth";
-import { api } from "../../services/api";
 import "swiper/css/navigation";
 import "swiper/css";
 import "swiper/css/effect-fade";
 
-export function DishGallery() {
-  const [dishes, setDishes] = useState([]);
-  const isMobile = useIsMobile();
+// 2. Componentes internos
+import { Container, GradientOverlay } from "./styles";
+import { DishCard } from "../DishCard";
 
-  const { getAllDishes } = useAuth();
+// 3. Hooks personalizados
+import { useIsMobile } from "../../hooks/useIsMobile";
+import { useAuth } from "../../hooks/auth";
+
+// 4. Utilitários e Helpers
+import { api } from "../../services/api";
+
+export function DishGallery() {
+  const [dishes, setDishes] = useState([]); // Estado para armazenar os pratos
+  const isMobile = useIsMobile(); // Hook para detectar se a visualização é móvel
+  const { getAllDishes } = useAuth(); // Função para obter todos os pratos
+
+  // useEffect para buscar os dados dos pratos ao carregar o componente
   useEffect(() => {
     const fetchDishes = async () => {
       const data = await getAllDishes();
@@ -24,12 +32,10 @@ export function DishGallery() {
     fetchDishes();
   }, [getAllDishes]);
 
-  const customCategoryOrder = [
-    "Refeições",
-    "Bebidas",
-    "Sobremesa",
-  ];
+  // Ordem personalizada das categorias
+  const customCategoryOrder = ["Refeições", "Bebidas", "Sobremesa"];
 
+  // Agrupar pratos por categoria
   const categorizedDishes = dishes.reduce((acc, dish) => {
     if (!acc[dish.category]) {
       acc[dish.category] = [];
@@ -38,6 +44,7 @@ export function DishGallery() {
     return acc;
   }, {});
 
+  // Ordenar as categorias de acordo com a ordem personalizada
   const sortedCategories = Object.keys(categorizedDishes).sort((a, b) => {
     return customCategoryOrder.indexOf(a) - customCategoryOrder.indexOf(b);
   });
@@ -51,8 +58,7 @@ export function DishGallery() {
             <Swiper
               slidesPerView={isMobile ? 2 : 3.5}
               loop={true}
-              spaceBetween='50'
-
+              spaceBetween={50}
             >
               {categorizedDishes[category].map((dish) => (
                 <SwiperSlide key={dish.id}>
@@ -66,7 +72,6 @@ export function DishGallery() {
                 </SwiperSlide>
               ))}
             </Swiper>
-
             <GradientOverlay />
           </div>
         </div>

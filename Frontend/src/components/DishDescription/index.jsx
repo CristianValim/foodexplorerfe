@@ -1,39 +1,53 @@
-// src/components/DishDescription.js
-import { Container, LoadingContainer } from "./styles";
+// 1. Bibliotecas externas
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import BounceLoader from "react-spinners/BounceLoader";
+
+// 2. Componentes internos
 import { QuantitySelector } from "../QuantitySelector";
 import { Button } from "../Button";
-import arrowBack from "../../assets/icons/CaretLeft.svg";
-import receipt from "../../assets/icons/Receipt.svg";
-import { AnimatePresence, motion } from "framer-motion";
-import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { api } from "../../services/api";
+import { Container, LoadingContainer } from "./styles";
+
+// 3. Hooks personalizados
 import { useAuth } from "../../hooks/auth";
-import BounceLoader from "react-spinners/BounceLoader";
+
+// 4. Contextos
 import { useCart } from "../../contexts/CartContext";
 
-export function DishDescription() {
-  const { id } = useParams();
-  const [dish, setDish] = useState(null);
-  const [quantity, setQuantity] = useState(1);
-  const { isAdmin } = useAuth();
-  const navigate = useNavigate();
-  const { addToCart } = useCart();
+// 5. Utilitários e Helpers
+import { api } from "../../services/api";
 
+// 6. Assets
+import arrowBack from "../../assets/icons/CaretLeft.svg";
+import receipt from "../../assets/icons/Receipt.svg";
+
+export function DishDescription() {
+  const { id } = useParams(); // Pega o ID do prato dos parâmetros da URL
+  const [dish, setDish] = useState(null); // Estado para armazenar os dados do prato
+  const [quantity, setQuantity] = useState(1); // Estado para armazenar a quantidade do prato
+  const { isAdmin } = useAuth(); // Verifica se o usuário é administrador
+  const navigate = useNavigate(); // Hook para navegação
+  const { addToCart } = useCart(); // Função para adicionar ao carrinho
+
+  // Função para navegar para a página de edição do prato
   function handleNavigateEdit() {
     navigate(`/dishes/editdish/${id}`);
   }
 
+  // Função para navegar para a página inicial
   function handleNavigate() {
     navigate("/");
   }
 
+  // Função para adicionar o prato ao carrinho
   function handleAddToCart() {
     if (dish) {
       addToCart({ ...dish, quantity });
     }
   }
 
+  // useEffect para buscar os dados do prato ao carregar o componente
   useEffect(() => {
     const fetchDish = async () => {
       try {
@@ -48,6 +62,7 @@ export function DishDescription() {
     fetchDish();
   }, [id]);
 
+  // Se os dados do prato ainda não foram carregados, mostra um loader
   if (!dish) {
     return (
       <LoadingContainer>
@@ -61,6 +76,7 @@ export function DishDescription() {
     );
   }
 
+  // Separa as tags do prato, tratando caso seja string ou array
   const tags = Array.isArray(dish.tags) ? dish.tags : dish.tags.split(",");
 
   return (
@@ -102,7 +118,6 @@ export function DishDescription() {
                 onClick={handleAddToCart}
               />
             </div>
-
             <div
               className="edit-dish"
               style={{ display: isAdmin ? "block" : "none" }}

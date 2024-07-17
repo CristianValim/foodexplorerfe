@@ -1,10 +1,15 @@
+// 1. Bibliotecas externas
 import { useState } from "react";
+
+// 2. Componentes internos
 import { Container } from "./styles.js";
 
+// Componente funcional FileInput
 export function FileInput({ name, onChange }) {
   const [preview, setPreview] = useState(null);
   const [hovering, setHovering] = useState(false);
 
+  // Função para lidar com a mudança de arquivo selecionado
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -14,11 +19,13 @@ export function FileInput({ name, onChange }) {
       };
       reader.readAsDataURL(file);
     }
+    // Chama a função onChange passada como prop, se existir
     if (onChange) {
       onChange(event);
     }
   };
 
+  // Funções para lidar com eventos de mouse
   const handleMouseEnter = () => {
     setHovering(true);
   };
@@ -30,10 +37,7 @@ export function FileInput({ name, onChange }) {
   return (
     <Container>
       <span>Imagem do prato</span>
-      <div
-        className="image-preview"
-        style={{ display: hovering ? "block" : "none" }}
-      >
+      <div className="image-preview" style={{ display: hovering ? "block" : "none" }}>
         <img src={preview} alt="Preview" />
       </div>
       <label

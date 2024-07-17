@@ -1,74 +1,67 @@
-import { useEffect, useState } from "react";
-import { Container } from "./styles";
-import { useAuth } from "../../hooks/auth";
-import { Menu } from "../Menu";
+// 1. Bibliotecas externas
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Switch from "react-switch";
 import { Tooltip } from "react-tooltip";
 import { FaRegCircleQuestion } from "react-icons/fa6";
+import { Twirl as Hamburger } from "hamburger-react";
+
+// 2. Componentes internos
+import { Container } from "./styles";
+import { Menu } from "../Menu";
+import { InputSearch } from "../InputSearch";
+
+// 3. Hooks personalizados
+import { useAuth } from "../../hooks/auth";
 import { useIsMobile } from "../../hooks/useIsMobile";
+
+// 4. Contextos
+import { useCart } from "../../contexts/CartContext";
+
+// 5. Assets
 import logo from "../../assets/icons/logo.svg";
 import cart from "../../assets/icons/Receipt.svg";
 import signout from "../../assets/icons/SignOut.svg";
-import { Link } from "react-router-dom";
-import { Twirl as Hamburger } from "hamburger-react";
-import { InputSearch } from "../InputSearch";
-import { useCart } from "../../contexts/CartContext";
 
 export function Header({ isAdmin }) {
-  const { updateUserRole, signOut, user } = useAuth();
-  const [isOpen, setOpen] = useState(false);
-  const { getCartItemCount } = useCart();
-  const [canToggleMenu, setCanToggleMenu] = useState(true);
+  const { updateUserRole, signOut, user } = useAuth(); // Hook useAuth para autenticação e controle de usuário
+  const [isOpen, setOpen] = useState(false); // Estado para controlar se o menu está aberto ou fechado
+  const { getCartItemCount } = useCart(); // Contexto useCart para contagem de itens no carrinho
+  const [canToggleMenu, setCanToggleMenu] = useState(true); // Estado para controlar se é possível alternar o menu
 
-  const [isGodMode, setIsGodMode] = useState(user.role === "admin");
-  const isMobile = useIsMobile();
+  const [isGodMode, setIsGodMode] = useState(user.role === "admin"); // Estado para controlar o modo administrador (GodMode)
+  const isMobile = useIsMobile(); // Hook useIsMobile para detectar se o dispositivo é mobile
+
+  // Função assíncrona para lidar com a mudança de modo GodMode
   const handleGodModeChange = async (checked) => {
-    setIsGodMode(checked);
-    const newRole = checked ? "admin" : "user";
+    setIsGodMode(checked); // Atualiza o estado de GodMode
+    const newRole = checked ? "admin" : "user"; // Define o novo papel do usuário (admin ou user)
 
     try {
-      await updateUserRole(newRole);
+      await updateUserRole(newRole); // Atualiza o papel do usuário via API
     } catch (error) {
-      console.error("Erro ao atualizar papel:", error);
+      console.error("Erro ao atualizar papel:", error); // Trata erro caso ocorra ao atualizar o papel do usuário
     }
   };
 
+  // Função para alternar o estado do menu
   function handleMenuToggle() {
     if (canToggleMenu) {
-      setOpen(!isOpen);
-      setCanToggleMenu(false);
+      setOpen(!isOpen); // Alterna o estado de aberto/fechado do menu
+      setCanToggleMenu(false); // Impede múltiplas trocas rápidas do estado do menu
       setTimeout(() => {
-        setCanToggleMenu(true);
+        setCanToggleMenu(true); // Permite nova alternância do menu após um segundo
       }, 1000);
     }
   }
 
+  // Efeito para controlar o overflow do body ao abrir/fechar o menu
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        setOpen(false);
-        console.log("Esc");
-      }
-    };
+    const body = document.querySelector("body"); // Seleciona o elemento body
 
-    const timer = setTimeout(() => {
-      document.addEventListener("keydown", handleKeyDown);
-    }, 100);
-
-    return () => {
-      clearTimeout(timer);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    const body = document.querySelector("body");
-    if (isOpen) {
-      body.style.overflow = "hidden";
-    } else {
-      body.style.overflow = "auto";
-    }
+    // Controla o overflow do body dependendo do estado de abertura do menu
+    body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
 
   return (
