@@ -1,4 +1,4 @@
-# Food Explorer
+# Food Explorer Frontend
 
 ![Capa do Projeto](./src/assets/capa%20do%20projeto.png)
 
