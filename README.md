@@ -55,6 +55,9 @@ Projeto final da [Rocketseat](rocketseat.com.br) (escola de programação), o Fo
 - **Site no ar em Produção no Netlify** [Link para o Frontend](https://foodexplorerbycristianvalim.netlify.app/) 
 - **API em Produção no Render:** [Link para a API](https://foodexplorer-api-a607.onrender.com) 
 
+## Repositórios
+- **Backend:** [Repositório do Backend](https://github.com/CristianValim/foodexplorer-backend)
+
 ## Autores
 
 - **Cristian Valim** - Desenvolvimento
