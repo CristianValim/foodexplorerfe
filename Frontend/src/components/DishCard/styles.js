@@ -45,7 +45,11 @@ export const Container = styled.div`
     }
 
     img {
+      width: 100%;
       max-width: 9rem;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 50%;
     }
   }
 

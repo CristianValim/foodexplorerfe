@@ -1,23 +1,30 @@
+// 1. Bibliotecas externas
 import { useState } from "react";
-import { useAuth } from "../../hooks/auth";
 import { Link } from "react-router-dom";
-import { Container } from "./styles";
 import Switch from "react-switch";
 import { Tooltip } from "react-tooltip";
 import { FaRegCircleQuestion } from "react-icons/fa6";
-import { Footer } from "../Footer";
 import { Twirl as Hamburger } from "hamburger-react";
+
+// 2. Componentes internos
+import { Container } from "./styles";
+import { Footer } from "../Footer";
 import { InputSearch } from "../InputSearch";
 
+// 3. Hooks personalizados
+import { useAuth } from "../../hooks/auth";
+
+// Componente Menu
 export function Menu({ isOpen, setOpen }) {
-  const { signOut, user, updateUserRole, isAdmin } = useAuth();
+  const { signOut, user, updateUserRole, isAdmin } = useAuth(); // Hook de autenticação
+  const [isGodMode, setIsGodMode] = useState(user.role === "admin"); // Estado para GodMode
 
-  const [isGodMode, setIsGodMode] = useState(user.role === "admin");
-
+  // Função para lidar com cliques em links
   const handleLinkClick = () => {
     setOpen(false);
   };
 
+  // Função para alterar o modo GodMode
   const handleGodModeChange = async (checked) => {
     setIsGodMode(checked);
     const newRole = checked ? "admin" : "user";
@@ -45,22 +52,26 @@ export function Menu({ isOpen, setOpen }) {
       </div>
       <main>
         <div className="search-container">
-          <InputSearch
-            setOpen={setOpen}
-          />
+          <InputSearch setOpen={setOpen} />
         </div>
-        <Link
-          to="/dishes/newdish"
-          onClick={handleLinkClick}
-          style={{ display: isAdmin ? "block" : "none" }}
-        >
-          Novo Prato
-        </Link>
-        <span style={{ display: isAdmin ? "block" : "none" }}></span>
+
+        {/* Link para adicionar novo prato, visível apenas para administradores */}
+        {isAdmin && (
+          <>
+            <Link to="/dishes/newdish" onClick={handleLinkClick}>
+              Novo Prato
+            </Link>
+            <span></span>
+          </>
+        )}
+
+        {/* Link para sair */}
         <Link onClick={signOut} to="/">
           Sair
         </Link>
         <span></span>
+
+        {/* Switch para GodMode */}
         <div className="godmode">
           GodMode
           <FaRegCircleQuestion

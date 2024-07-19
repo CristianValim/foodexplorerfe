@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import { BrowserRouter } from "react-router-dom";
-import theme from "./styles/theme";
 import GlobalStyles from "./styles/global";
 import { AuthProvider } from "./hooks/auth";
 import { ToastContainer } from "react-toastify";
@@ -13,7 +12,7 @@ import { CartProvider } from "./contexts/CartContext";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider>
         <GlobalStyles />
         <AuthProvider>
           <CartProvider>
@@ -29,7 +28,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               draggable
               pauseOnHover
               theme="colored"
-              transition:Bounce
             />
           </CartProvider>
         </AuthProvider>

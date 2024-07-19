@@ -22,8 +22,11 @@ export const Container = styled.div`
 
   // Estilização da imagem do prato
   .dishPicture {
-    padding-inline: 2.6rem;
     margin: 1.6rem auto;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   // Estilização do título (nome do prato)

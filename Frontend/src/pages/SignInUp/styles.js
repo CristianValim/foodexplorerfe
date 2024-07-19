@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  /* Layout base */
   margin-inline: 10%;
 
   .logo {
     width: 100%;
     max-width: 32.5rem;
-
     padding-top: 16rem;
     padding-bottom: 7.5rem;
   }
@@ -29,9 +29,9 @@ export const Container = styled.div`
     margin-inline: auto;
   }
 
+  /* Layout para telas maiores */
   @media (min-width: 600px) {
     min-height: 100dvh;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,12 +43,11 @@ export const Container = styled.div`
     }
 
     .auto {
-      margin-inline: auto
+      margin-inline: auto;
     }
 
     .wrapper {
       background-color: ${({ theme }) => theme.COLORS.DARK_700};
-
       min-width: 48rem;
       padding: 6.4rem;
       border-radius: 1.6rem;

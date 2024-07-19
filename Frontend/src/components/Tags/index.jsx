@@ -1,10 +1,15 @@
+// 1. Bibliotecas externas
 import { useState } from "react";
-import { Container } from "./styles";
 import { FiPlus, FiX } from "react-icons/fi";
 
+// 2. Componentes internos
+import { Container } from "./styles";
+
+// Componente Tags
 export function Tags({ isNew, onAddTag, onRemoveTag, tag }) {
   const [newTag, setNewTag] = useState("");
 
+  // Função para adicionar uma nova tag
   function handleAddTag() {
     if (newTag.trim() === "") return;
 
@@ -14,6 +19,7 @@ export function Tags({ isNew, onAddTag, onRemoveTag, tag }) {
 
   return (
     <Container isNew={isNew}>
+      {/* Campo de input para adicionar ou exibir uma tag */}
       <input
         type="text"
         value={isNew ? newTag : tag}
@@ -27,6 +33,8 @@ export function Tags({ isNew, onAddTag, onRemoveTag, tag }) {
           }
         }}
       />
+      
+      {/* Botão para adicionar ou remover uma tag */}
       <button
         type="button"
         onClick={() => {

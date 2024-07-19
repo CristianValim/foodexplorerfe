@@ -53,10 +53,11 @@ export const Container = styled.div`
     z-index: 10;
 
     img {
+      width: 100%;
       max-width: 15rem;
-      max-height: 15rem;
       display: block;
-      transition: all 1s;
+      aspect-ratio: 1;
+      object-fit: cover;
     }
   }
 `;

@@ -1,33 +1,40 @@
+// 1. Bibliotecas externas
 import { useRef, useState } from "react";
-import { useGetBack } from "../../hooks/useGetBack";
-import { Container } from "./styles";
-import arrowBack from "../../assets/icons/CaretLeft.svg";
-
+import CurrencyInput from "react-currency-input-field";
 import { toast } from "react-toastify";
+
+// 2. Componentes internos
+import { Container } from "./styles";
 import { ValidationErrorToast } from "../../components/ValidationErrorToast";
 import { FileInput } from "../../components/FileInput";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Tags } from "../../components/Tags";
-import CurrencyInput from "react-currency-input-field";
 
+// 3. Utilitários e Helpers
 import { api } from "../../services/api";
 
-export function NewDish() {
-  const [image, setImage] = useState(null);
-  const [imageName, setImageName] = useState("");
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("Refeições");
-  const [tags, setTags] = useState([]);
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
+// 4. Assets
+import arrowBack from "../../assets/icons/CaretLeft.svg";
 
+export function NewDish() {
+  // Estado para armazenar informações do prato
+  const [image, setImage] = useState(null); // Imagem do prato
+  const [imageName, setImageName] = useState(""); // Nome do arquivo da imagem
+  const [name, setName] = useState(""); // Nome do prato
+  const [category, setCategory] = useState("Refeições"); // Categoria do prato
+  const [tags, setTags] = useState([]); // Tags associadas ao prato
+  const [price, setPrice] = useState(""); // Preço do prato
+  const [description, setDescription] = useState(""); // Descrição do prato
+
+  // Referências para os inputs para focar neles
   const nameRef = useRef(null);
   const categoryRef = useRef(null);
   const tagsRef = useRef(null);
   const priceRef = useRef(null);
   const descriptionRef = useRef(null);
 
+  // Função para limpar o formulário
   function clearForm() {
     setImage(null);
     setImageName("");
@@ -38,21 +45,26 @@ export function NewDish() {
     setDescription("");
   }
 
+  // Função para lidar com a mudança da imagem
   function handleChangeImage(event) {
-    const file = event.target.files[0];
-    setImage(file);
-    setImageName(file.name);
+    const file = event.target.files[0]; // Obtém o arquivo da imagem selecionado
+    setImage(file); // Atualiza o estado com o arquivo da imagem
+    setImageName(file.name); // Atualiza o nome do arquivo da imagem
   }
 
+  // Função para adicionar uma nova tag
   function handleAddTag(newTag) {
-    setTags((prevTags) => [...prevTags, newTag]);
+    setTags((prevTags) => [...prevTags, newTag]); // Adiciona a nova tag ao estado
   }
 
+  // Função para remover uma tag existente
   function handleRemoveTag(tagToRemove) {
-    setTags((prevTags) => prevTags.filter((tag) => tag !== tagToRemove));
+    setTags((prevTags) => prevTags.filter((tag) => tag !== tagToRemove)); // Remove a tag do estado
   }
 
+  // Função para cadastrar um novo prato
   async function handleNewDish() {
+    // Valida os dados e mostra um erro se houver alguma inconsistência
     const isError = ValidationErrorToast({
       name,
       category,
@@ -62,15 +74,16 @@ export function NewDish() {
       tags,
     });
 
-    if (isError) return;
+    if (isError) return; // Se houver um erro, não prossegue
 
+    // Cria um objeto FormData para enviar os dados com a imagem
     const formData = new FormData();
     formData.append("name", name);
     formData.append("category", category);
     formData.append("price", price);
     formData.append("description", description);
-    formData.append("image", image);
-    const tagsJSON = JSON.stringify(tags);
+    formData.append("image", image); // Adiciona a imagem se existir
+    const tagsJSON = JSON.stringify(tags); // Converte as tags em JSON
     formData.append("tags", tagsJSON);
 
     try {
@@ -80,37 +93,37 @@ export function NewDish() {
           "Content-Type": "multipart/form-data",
         },
       });
-      toast.success("Prato cadastrado com sucesso");
-
-      return clearForm();
+      toast.success("Prato cadastrado com sucesso"); // Mostra uma mensagem de sucesso
+      clearForm(); // Limpa o formulário após o sucesso
     } catch (error) {
       if (error.response) {
-        toast.error(error.response.data.message);
-        return clearForm();
+        toast.error(error.response.data.message); // Mostra a mensagem de erro recebida da API
       } else {
-        toast.error("Não foi possível cadastrar");
+        toast.error("Não foi possível cadastrar"); // Mensagem de erro genérica
       }
+      clearForm(); // Limpa o formulário em caso de erro
     }
   }
 
+  // Função para lidar com o pressionamento da tecla Enter para navegação entre os inputs
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      event.preventDefault();
+      event.preventDefault(); // Previne o comportamento padrão do Enter
       switch (event.target.name) {
         case "name":
-          categoryRef.current.focus();
+          categoryRef.current.focus(); // Foca no próximo input (categoria)
           break;
         case "category":
-          tagsRef.current.focus();
+          tagsRef.current.focus(); // Foca no próximo input (tags)
           break;
         case "tags":
-          priceRef.current.focus();
+          priceRef.current.focus(); // Foca no próximo input (preço)
           break;
         case "price":
-          descriptionRef.current.focus();
+          descriptionRef.current.focus(); // Foca no próximo input (descrição)
           break;
         case "description":
-          handleNewDish();
+          handleNewDish(); // Chama a função para cadastrar o prato ao pressionar Enter na descrição
           break;
         default:
           break;
@@ -120,18 +133,21 @@ export function NewDish() {
 
   return (
     <Container>
-      <button onClick={useGetBack} className="getBack">
+      {/* Botão para voltar à página anterior */}
+      <button onClick={window.history.back()} className="getBack">
         <img src={arrowBack} alt="Voltar" /> voltar
       </button>
 
       <h1>Novo prato</h1>
 
       <form onSubmit={(e) => e.preventDefault()}>
+        {/* Componente para seleção de imagem */}
         <FileInput
           name={imageName ? imageName : "Selecione uma imagem"}
           onChange={handleChangeImage}
         />
 
+        {/* Input para nome do prato */}
         <Input
           type="text"
           name="Nome"
@@ -142,6 +158,7 @@ export function NewDish() {
           ref={nameRef}
         />
 
+        {/* Seletor para categoria do prato */}
         <label className="dishCategory" htmlFor="category">
           Categoria
           <select
@@ -159,6 +176,7 @@ export function NewDish() {
           </select>
         </label>
 
+        {/* Seção para tags/ingredientes do prato */}
         <label className="tagsLabel" htmlFor="tags">
           Ingredientes
           <section className="tagsSection">
@@ -169,6 +187,7 @@ export function NewDish() {
           </section>
         </label>
 
+        {/* Input para preço do prato */}
         <label className="inputPriceLabel" htmlFor="inputPrice">
           Preço
           <CurrencyInput
@@ -188,6 +207,7 @@ export function NewDish() {
           />
         </label>
 
+        {/* Textarea para descrição do prato */}
         <label className="description" htmlFor="description">
           Descrição
           <textarea
@@ -203,6 +223,7 @@ export function NewDish() {
           ></textarea>
         </label>
 
+        {/* Botão para salvar alterações */}
         <Button
           type="submit"
           name="salvar alteracoes"

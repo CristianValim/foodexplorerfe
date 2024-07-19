@@ -1,4 +1,3 @@
-import React from "react";
 import { Container } from "./styles";
 import logoFooter from "../../assets/icons/logoFooter.svg"; // Importação do ícone do logo
 
