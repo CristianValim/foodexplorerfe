@@ -50,6 +50,11 @@ Projeto final da [Rocketseat](rocketseat.com.br) (escola de programação), o Fo
    - Como usuário: Pesquise pratos, escolha quantidades e adicione ao carrinho.
    - Como admin: Utilize o toggle disponível na interface para alternar entre os modos de usuário e administrador. Adicione, edite ou remova pratos conforme necessário.
 
+## Documentação da API
+
+- **Site no ar em Produção no Netlify** [Link para o Frontend](https://foodexplorerbycristianvalim.netlify.app/) 
+- **API em Produção no Render:** [Link para a API](https://foodexplorer-api-a607.onrender.com) 
+
 ## Autores
 
 - **Cristian Valim** - Desenvolvimento
