@@ -63,3 +63,5 @@ Este projeto é licenciado pela Rocketseat.
 
 - **Figma do Projeto:** [Food Explorer no Figma](https://www.figma.com/design/oIO8asqIql3ZEpTxlMUfxt/food-explorer-v2-(Community)?node-id=201-1532&t=z3lUeE0ugd3CSY23-0)
 - **GitHub do Backend:** [Repositório do Backend](https://github.com/CristianValim/foodexplorerbe)
+
+![Logo Rocketseat](./src/assets/Rocketseat.png)
