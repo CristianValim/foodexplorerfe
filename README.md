@@ -1,7 +1,9 @@
 # Food Explorer Frontend
 
 ![Capa do Projeto](./src/assets/capa%20do%20projeto.png)
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3725f1d8-5d9a-4728-afe1-ccb4b7d62b43/deploy-status)](https://app.netlify.com/sites/foodexplorerbycristianvalim/deploys)
+
 Projeto final da [Rocketseat](rocketseat.com.br) (escola de programação), o Food Explorer é um site de um restaurante onde você pode pesquisar pratos e fazer pedidos como cliente. Como administrador, você tem funcionalidades para adicionar, editar e remover pratos pelo site.
 
 ## Funcionalidades
@@ -56,7 +58,7 @@ Projeto final da [Rocketseat](rocketseat.com.br) (escola de programação), o Fo
 - **API em Produção no Render:** [Link para a API](https://foodexplorer-api-a607.onrender.com) 
 
 ## Repositórios
-- **Backend:** [Repositório do Backend](https://github.com/CristianValim/foodexplorer-backend)
+- **Backend:** [Repositório do Backend](https://github.com/CristianValim/foodexplorerbe)
 
 ## Autores
 
