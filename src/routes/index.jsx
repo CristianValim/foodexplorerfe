@@ -2,8 +2,8 @@ import { AnimatePresence } from "framer-motion";
 import { MdOutlineLightMode, MdLightMode } from "react-icons/md";
 import { useAuth } from "../hooks/auth";
 import { useTheme } from "../contexts/ThemeContext";
-import { AppRoutes } from "../routes/app.routes";
-import { AuthRoutes } from "../routes/auth.routes";
+import { AppRoutes } from "./app.routes";
+import { AuthRoutes } from "./auth.routes";
 import styled from "styled-components";
 
 const ToggleButton = styled.button`
@@ -23,15 +23,19 @@ const ToggleButton = styled.button`
 `;
 
 export function AnimatedRoutes() {
-  const { user } = useAuth();
-  const { theme, toggleTheme } = useTheme();
+	const { user } = useAuth();
+	const { theme, toggleTheme } = useTheme();
 
-  return (
-    <AnimatePresence>
-      <ToggleButton onClick={toggleTheme}>
-        {theme === "light" ? (<MdOutlineLightMode size={35} />) : (<MdLightMode size={35} />)}
-      </ToggleButton>
-      {user ? <AppRoutes /> : <AuthRoutes />}
-    </AnimatePresence>
-  );
+	return (
+		<AnimatePresence>
+			<ToggleButton onClick={toggleTheme}>
+				{theme === "light" ? (
+					<MdOutlineLightMode size={35} />
+				) : (
+					<MdLightMode size={35} />
+				)}
+			</ToggleButton>
+			{user ? <AppRoutes /> : <AuthRoutes />}
+		</AnimatePresence>
+	);
 }

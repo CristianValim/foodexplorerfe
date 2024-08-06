@@ -1,10 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // Estilização do componente Container usando styled-components
 export const Container = styled.button`
   /* Define a cor de fundo baseada na prop toDelete */
-  background-color: ${({ toDelete, theme }) =>
-    toDelete ? theme.COLORS.DARK_800 : theme.COLORS.TOMATO_100};
+  background-color: ${({ toDelete, theme }) => (toDelete ? theme.COLORS.DARK_800 : theme.COLORS.TOMATO_100)};
 
   display: flex;
   align-items: center;
