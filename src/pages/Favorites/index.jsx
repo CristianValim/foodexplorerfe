@@ -73,7 +73,7 @@ export function Favorites() {
         <h1>Favoritos</h1>
         {sortedCategories.length > 0 ? (
           sortedCategories.map((category, index) => (
-            <div key={`${category}-${index}`} className="category-section">
+            <div key={`${category}+${index}`} className="category-section">
               <h2 className="category">{category}</h2>
               <div className="swiper-container">
                 <Swiper

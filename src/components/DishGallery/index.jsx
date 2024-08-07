@@ -51,8 +51,8 @@ export function DishGallery() {
 
 	return (
 		<Container>
-			{sortedCategories.map((category, index) => (
-				<div key={`${category}-${index}`} className="category-section">
+			{sortedCategories.map((category) => (
+				<div key={category} className="category-section">
 					<h2 className="category">{category}</h2>
 					<div className="swiper-container">
 						<Swiper
@@ -61,7 +61,7 @@ export function DishGallery() {
 							spaceBetween={50}
 						>
 							{categorizedDishes[category].map((dish) => (
-								<SwiperSlide key={`${category}-${dish.id}-${dish.name}`}>
+								<SwiperSlide key={`${category}-${dish.id}`}>
 									<DishCard
 										id={dish.id}
 										dish={dish.name}

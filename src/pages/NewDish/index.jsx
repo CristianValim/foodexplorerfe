@@ -130,11 +130,14 @@ export function NewDish() {
 			}
 		}
 	};
-
+	function handleGetBack() {
+		window.history.back();
+	}
+	
 	return (
 		<Container>
 			{/* Botão para voltar à página anterior */}
-			<button onClick={window.history.back()} className="getBack">
+			<button type="button" onClick={handleGetBack} className="getBack">
 				<img src={arrowBack} alt="Voltar" /> voltar
 			</button>
 
@@ -182,13 +185,13 @@ export function NewDish() {
 					<section className="tagsSection">
 						{tags.map((tag, index) => (
 							<Tags
-								key={`tag-${index}`}
+								key={`${tag.id}+${index}`}
 								tag={tag}
 								onRemoveTag={handleRemoveTag}
 							/>
 						))}
 
-						<Tags key="new-tag" isNew onAddTag={handleAddTag} ref={tagsRef} />
+						<Tags key="new-tag" isNew={true} onAddTag={handleAddTag} ref={tagsRef} />
 					</section>
 				</label>
 
@@ -204,7 +207,6 @@ export function NewDish() {
 						decimalsLimit={2}
 						intlConfig={{ locale: "pt-BR", currency: "BRL" }}
 						decimalScale={2}
-						fixedDecimalScale
 						onValueChange={(value) => setPrice(value)}
 						onKeyDown={handleKeyDown}
 						ref={priceRef}

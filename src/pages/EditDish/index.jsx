@@ -136,6 +136,7 @@ export function EditDish() {
 						<h1>Tem certeza que deseja excluir o prato?</h1>
 						<div className="buttons">
 							<button
+								type="button"
 								onClick={async () => {
 									try {
 										await api.delete(`/dishes/${id}`); // Envia a requisição para excluir o prato
@@ -149,7 +150,9 @@ export function EditDish() {
 							>
 								Sim
 							</button>
-							<button onClick={onClose}>Não</button>
+							<button type="button" onClick={onClose}>
+								Não
+							</button>
 						</div>
 					</CustomConfirmAlert>
 				);
@@ -183,10 +186,14 @@ export function EditDish() {
 		}
 	};
 
+	function handleGetBack() {
+		window.history.back();
+	}
+	
 	return (
 		<Container>
 			{/* Botão para voltar à página anterior */}
-			<button onClick={window.history.back()} className="getBack">
+			<button type="button" onClick={handleGetBack} className="getBack">
 				<img src={arrowBack} alt="Voltar" /> voltar
 			</button>
 
@@ -232,14 +239,19 @@ export function EditDish() {
 				<label className="tagsLabel" htmlFor="tags">
 					Ingredientes
 					<section className="tagsSection">
-						{tags.map((tag, index) => (
+						{tags.map((tag) => (
 							<Tags
-								key={`tag-${index}`}
+								key={`tag-${tag.id}`}
 								tag={tag}
 								onRemoveTag={handleRemoveTag}
 							/>
 						))}
-						<Tags key="new-tag" isNew onAddTag={handleAddTag} ref={tagsRef} />
+						<Tags
+							key="new-tag"
+							isNew={true}
+							onAddTag={handleAddTag}
+							ref={tagsRef}
+						/>
 					</section>
 				</label>
 
@@ -255,8 +267,6 @@ export function EditDish() {
 						decimalsLimit={2}
 						intlConfig={{ locale: "pt-BR", currency: "BRL" }}
 						decimalScale={2}
-						fixedDecimalScale
-						allowNegative={false}
 						onValueChange={(value) => setPrice(value)}
 						onKeyDown={handleKeyDown}
 						ref={priceRef}
@@ -276,7 +286,7 @@ export function EditDish() {
 						onChange={(e) => setDescription(e.target.value)}
 						onKeyDown={handleKeyDown}
 						ref={descriptionRef}
-					></textarea>
+					/>
 				</label>
 
 				{/* Botões para excluir e salvar alterações */}

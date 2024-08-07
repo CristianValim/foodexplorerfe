@@ -76,8 +76,7 @@ export function DishDescription() {
 		);
 	}
 
-	// Separa as tags do prato, tratando caso seja string ou array
-	const tags = Array.isArray(dish.tags) ? dish.tags : dish.tags.split(",");
+
 
 	return (
 		<AnimatePresence>
@@ -88,7 +87,7 @@ export function DishDescription() {
 				exit={{ opacity: 0 }}
 				transition={{ duration: 0.3 }}
 			>
-				<button onClick={handleNavigate} className="getBack">
+				<button type="button" onClick={handleNavigate} className="getBack">
 					<img src={arrowBack} alt="Voltar" /> voltar
 				</button>
 				<div className="description">
@@ -101,8 +100,8 @@ export function DishDescription() {
 						<h1 className="title">{dish.name}</h1>
 						<p className="description">{dish.description}</p>
 						<ul className="tags">
-							{tags.map((tag, index) => (
-								<li key={index} className="tag">
+							{dish.tags.map((tag, index) => (
+								<li key={`${tag.id}-${index}`} className="tag">
 									{tag.trim()}
 								</li>
 							))}

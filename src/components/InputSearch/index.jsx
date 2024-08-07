@@ -72,8 +72,8 @@ export function InputSearch({ placeholder, setOpen }) {
 				/>
 				{searchResults.length > 0 && (
 					<ul className="search-results">
-						{searchResults.map((dish) => (
-							<li key={dish.id} onClick={() => handleResultClick(dish.id)}>
+						{searchResults.map((dish, index) => (
+							<li key={`${dish.id}+${index}`} onClick={() => handleResultClick(dish.id)} onKeyDown={() => handleResultClick(dish.id)} >
 								<div>
 									<span>{dish.name}</span>
 								</div>
