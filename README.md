@@ -12,18 +12,20 @@ Projeto final da [Rocketseat](rocketseat.com.br) (escola de programação), o Fo
 - **Pesquisar Pratos:** Permite ao usuário pesquisar por pratos disponíveis no restaurante.
 - **Escolher Quantidade:** Permite selecionar a quantidade de cada prato.
 - **Adicionar ao Carrinho:** Adiciona os pratos selecionados ao carrinho de compras.
+- **Adicionar aos Favoritos:** Permite ao usuário marcar pratos como favoritos para acesso rápido.
 
 ### Administrador
 - **Adicionar Pratos:** Possibilita a adição de novos pratos com descrição, imagem, tags e valor.
 - **Editar Pratos Existentes:** Permite editar as informações dos pratos já cadastrados.
 - **Remover Pratos Existentes:** Possibilita a remoção de pratos do sistema.
 
+### Geral
+- **Toggle de Dark e Light Mode:** Permite alternar entre os modos claro e escuro, ajustando a interface para a preferência do usuário. O modo inicial é determinado automaticamente com base na preferência de tema do sistema operacional do usuário, garantindo uma experiência mais personalizada desde o primeiro acesso.
+
 ## Funcionalidades futuras
 
-- **Carrinho de compras** Carrinho com itens selecionados para gerir o pedido.
-- **Métodos de pagamento** Tela com métodos de pagamento disponível.
-- **Aba de favoritos** Página com os pratos adicionados à favoritos.
-
+- **Carrinho de compras:** Carrinho com itens selecionados para gerir o pedido.
+- **Métodos de pagamento:** Tela com métodos de pagamento disponível.
 
 ## Tecnologias Utilizadas
 
@@ -43,6 +45,7 @@ Projeto final da [Rocketseat](rocketseat.com.br) (escola de programação), o Fo
 - **React Tooltip** (`^5.27.1`)
 - **Styled Components** (`^6.1.8`)
 - **Swiper** (`^11.1.1`)
+- **React Toggle Dark Mode** (`^1.1.1`)
 
 ## Como Usar
 
@@ -51,10 +54,12 @@ Projeto final da [Rocketseat](rocketseat.com.br) (escola de programação), o Fo
 3. **Explorar o App:**
    - Como usuário: Pesquise pratos, escolha quantidades e adicione ao carrinho.
    - Como admin: Utilize o toggle disponível na interface para alternar entre os modos de usuário e administrador. Adicione, edite ou remova pratos conforme necessário.
+   - Utilize o **Toggle de Dark e Light Mode** para ajustar a interface ao seu gosto.
+   - Adicione pratos aos **Favoritos** e acesse-os facilmente na aba de favoritos.
 
 ## Documentação da API
 
-- **Site no ar em Produção no Netlify** [Link para o Frontend](https://foodexplorerbycristianvalim.netlify.app/) 
+- **Site no ar em Produção no Netlify:** [Link para o Frontend](https://foodexplorerbycristianvalim.netlify.app/) 
 - **API em Produção no Render:** [Link para a API](https://foodexplorer-api-a607.onrender.com) 
 
 ## Repositórios
