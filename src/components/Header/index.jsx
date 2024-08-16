@@ -1,34 +1,37 @@
-// 1. Bibliotecas externas
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import Switch from "react-switch";
-import { Tooltip } from "react-tooltip";
-import { FaRegCircleQuestion } from "react-icons/fa6";
 import { Twirl as Hamburger } from "hamburger-react";
+// 1. Bibliotecas externas
+import { useEffect, useState } from "react";
+import { FaRegCircleQuestion } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+import Switch from "react-switch";
+import { toast } from "react-toastify";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
+import { Tooltip } from "react-tooltip";
 
+import { InputSearch } from "../InputSearch";
+import { Menu } from "../Menu";
 // 2. Componentes internos
 import { Container } from "./styles";
-import { Menu } from "../Menu";
-import { InputSearch } from "../InputSearch";
 
+// 4. Contextos
+import { useCart } from "../../contexts/CartContext";
+import { useTheme } from "../../contexts/ThemeContext";
 // 3. Hooks personalizados
 import { useAuth } from "../../hooks/auth";
 import { useIsMobile } from "../../hooks/useIsMobile";
 
-// 4. Contextos
-import { useCart } from "../../contexts/CartContext";
-
-// 5. Assets
-import logo from "../../assets/icons/logo.svg";
 import cart from "../../assets/icons/Receipt.svg";
 import signout from "../../assets/icons/SignOut.svg";
+// 5. Assets
+import logo from "../../assets/icons/logo.svg";
 
 export function Header({ isAdmin }) {
 	const { updateUserRole, signOut, user } = useAuth(); // Hook useAuth para autenticação e controle de usuário
 	const [isOpen, setOpen] = useState(false); // Estado para controlar se o menu está aberto ou fechado
 	const { getCartItemCount } = useCart(); // Contexto useCart para contagem de itens no carrinho
 	const [canToggleMenu, setCanToggleMenu] = useState(true); // Estado para controlar se é possível alternar o menu
+	const { theme, toggleTheme } = useTheme(); // Use o contexto de tema
 
 	const [isGodMode, setIsGodMode] = useState(user.role === "admin"); // Estado para controlar o modo administrador (GodMode)
 	const isMobile = useIsMobile(); // Hook useIsMobile para detectar se o dispositivo é mobile
@@ -41,7 +44,7 @@ export function Header({ isAdmin }) {
 		try {
 			await updateUserRole(newRole); // Atualiza o papel do usuário via API
 		} catch (error) {
-			console.error("Erro ao atualizar papel:", error); // Trata erro caso ocorra ao atualizar o papel do usuário
+			toast.error("Erro ao atualizar papel:", error); // Trata erro caso ocorra ao atualizar o papel do usuário
 		}
 	};
 
@@ -78,11 +81,11 @@ export function Header({ isAdmin }) {
 						distance="lg"
 						hideOutline={false}
 					/>
-					{isOpen && <Menu isOpen={isOpen} setOpen={setOpen} />}
+					{isOpen && <Menu isOpen={isOpen} setOpen={setOpen} key="menu" />}
 				</AnimatePresence>
 			</div>
 			<Link to="/" style={{ margin: "auto" }}>
-				<button className="logo-wrapp">
+				<button type="button" className="logo-wrapp">
 					<img className="logo" src={logo} alt="food explorer" />
 					<span
 						className="admin"
@@ -98,8 +101,12 @@ export function Header({ isAdmin }) {
 			>
 				<InputSearch />
 			</div>
-			<button className="cart" style={{ display: isAdmin ? "none" : "flex" }}>
-				<img src={cart} />
+			<button
+				type="button"
+				className="cart"
+				style={{ display: isAdmin ? "none" : "flex" }}
+			>
+				<img src={cart} alt="Carrinho" />
 				<span className="desktop">Pedidos</span>
 				<div className="badge">
 					{isMobile ? "" : "("}
@@ -116,8 +123,8 @@ export function Header({ isAdmin }) {
 			</Link>
 
 			<div className="signout">
-				<button onClick={signOut}>
-					<img src={signout} />
+				<button type="button" onClick={signOut}>
+					<img src={signout} alt="Sair" />
 				</button>
 			</div>
 			<div className="godmode" style={{ display: isMobile ? "none" : "flex" }}>
@@ -144,6 +151,14 @@ export function Header({ isAdmin }) {
 					}}
 				/>
 			</div>
+			<DarkModeSwitch
+				style={{ display: isMobile ? "none" : "block" }}
+				checked={theme === "light"}
+				onChange={toggleTheme}
+					moonColor="#FFFAF1"
+					sunColor="#FFFAF1"
+				size={80}
+			/>
 		</Container>
 	);
 }

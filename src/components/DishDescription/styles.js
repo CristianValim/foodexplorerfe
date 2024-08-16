@@ -2,23 +2,12 @@ import styled from "styled-components";
 
 // Estilização do contêiner principal
 export const Container = styled.div`
-  background-color: ${({ theme }) => theme.COLORS.DARK_400};
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+  color: ${({ theme }) => theme.COLORS.FONT_400};
   padding: 3.6rem 10% 5.5rem;
   font-size: 1.4rem;
-  min-height: 79dvh;
   display: grid;
   place-content: center;
-
-  // Estilização do botão de voltar
-  .getBack {
-    img {
-      width: 3.2rem;
-      height: 3.2rem;
-    }
-    font-size: 2.4rem;
-    display: flex;
-    align-items: center;
-  }
 
   // Estilização da imagem do prato
   .dishPicture {
@@ -51,7 +40,7 @@ export const Container = styled.div`
     gap: 2.5rem;
     margin-block: 2.4rem 4.8rem;
     li {
-      background-color: ${({ theme }) => theme.COLORS.DARK_1000};
+      background-color: ${({ theme }) => theme.COLORS.TAGS_BACKGROUND};
       padding: 0.4rem 0.8rem;
       border-radius: 0.5rem;
     }
@@ -115,11 +104,4 @@ export const Container = styled.div`
       margin: ${({ isAdmin }) => (isAdmin ? "0" : "auto")};
     }
   }
-`;
-
-// Estilização do contêiner de carregamento
-export const LoadingContainer = styled.div`
-  height: 79dvh;
-  display: grid;
-  place-content: center;
 `;

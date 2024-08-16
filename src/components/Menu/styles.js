@@ -5,13 +5,13 @@ export const Container = styled.section`
   overflow: hidden;
   z-index: 1000;
   inset: 0;
-  background-color: ${({ theme }) => theme.COLORS.DARK_400};
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
   font-size: 2.4rem;
 
   .menu-header {
     display: flex;
     align-items: center;
-    background-color: ${({ theme }) => theme.COLORS.DARK_700};
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
     font-family: ${({ theme }) => theme.FONTS.SECONDARY};
     min-height: 11.4rem;
     padding-top: 4.2rem;
@@ -21,15 +21,21 @@ export const Container = styled.section`
   }
   .search-container {
     margin-bottom: 3.6rem;
+    li {
+      outline: none;
+
+    }
   }
+
   main {
+    color: ${({ theme }) => theme.COLORS.FONT_600};
     display: grid;
     margin: 3.6rem 2.8rem;
   }
 
   span {
     margin-block: 1rem;
-    outline: 1px solid ${({ theme }) => theme.COLORS.DARK_1000};
+    outline: 1px solid ${({ theme }) => theme.COLORS.BACKGROUND_100};
   }
 
   footer {

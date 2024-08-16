@@ -1,41 +1,44 @@
-
-import { Twirl as Hamburger } from "hamburger-react";
 // 1. Bibliotecas externas
+import { Twirl as Hamburger } from "hamburger-react";
 import { useState } from "react";
 import { FaRegCircleQuestion } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Switch from "react-switch";
+import { toast } from "react-toastify";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { Tooltip } from "react-tooltip";
 
+// 2. Componentes internos
 import { Footer } from "../Footer";
 import { InputSearch } from "../InputSearch";
-// 2. Componentes internos
 import { Container } from "./styles";
 
 // 3. Hooks personalizados
 import { useAuth } from "../../hooks/auth";
+import { useTheme } from "../../contexts/ThemeContext";
 
 // Componente Menu
 export function Menu({ isOpen, setOpen }) {
 	const { signOut, user, updateUserRole, isAdmin } = useAuth(); // Hook de autenticação
 	const [isGodMode, setIsGodMode] = useState(user.role === "admin"); // Estado para GodMode
-
+	const { theme, toggleTheme } = useTheme(); // Use o contexto de tema
+	
 	// Função para lidar com cliques em links
-	const handleLinkClick = () => {
+	function handleLinkClick() {
 		setOpen(false);
-	};
+	}
 
 	// Função para alterar o modo GodMode
-	const handleGodModeChange = async (checked) => {
+	async function handleGodModeChange(checked) {
 		setIsGodMode(checked);
 		const newRole = checked ? "admin" : "user";
 
 		try {
 			await updateUserRole(newRole);
 		} catch (error) {
-			console.error("Erro ao atualizar papel:", error);
+			toast.error("Erro ao atualizar papel:", error);
 		}
-	};
+	}
 
 	return (
 		<Container>
@@ -50,6 +53,14 @@ export function Menu({ isOpen, setOpen }) {
 					hideOutline={false}
 				/>
 				<h1>Menu</h1>
+				<DarkModeSwitch
+					style={{ marginLeft: "auto" , marginRight: "1rem" }}
+					checked={theme === "light"}
+					onChange={toggleTheme}
+					moonColor="#FFFAF1"
+					sunColor="#FFFAF1"
+					size={40}
+				/>
 			</div>
 			<main>
 				<div className="search-container">
@@ -59,20 +70,10 @@ export function Menu({ isOpen, setOpen }) {
 				{/* Link para adicionar novo prato, visível apenas para administradores */}
 				{isAdmin && (
 					<>
-						<Link to="/dishes/newdish">
-							Novo Prato
-						</Link>
-						<span />
-					</>
-				)}
-
-				{/* Link para favoritos, visível apenas para usuarios*/}
-				{!isAdmin && (
-					<>
-						<Link to="/favorites" onClick={handleLinkClick}>
-							Favoritos
-						</Link>
-						<span />
+					<Link to="/dishes/newdish" onClick={handleLinkClick}>
+						Novo Prato
+					</Link>
+					<span />
 					</>
 				)}
 

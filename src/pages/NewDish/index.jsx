@@ -16,6 +16,7 @@ import { api } from "../../services/api";
 
 // 4. Assets
 import arrowBack from "../../assets/icons/CaretLeft.svg";
+import { GetBack } from "../../components/GetBack";
 
 export function NewDish() {
 	// Estado para armazenar informações do prato
@@ -87,7 +88,6 @@ export function NewDish() {
 		formData.append("tags", tagsJSON);
 
 		try {
-			console.log("Enviando requisição para o backend...");
 			await api.post("/dishes/newdish", formData, {
 				headers: {
 					"Content-Type": "multipart/form-data",
@@ -130,16 +130,11 @@ export function NewDish() {
 			}
 		}
 	};
-	function handleGetBack() {
-		window.history.back();
-	}
-	
+
 	return (
-		<Container>
+		<Container > 
 			{/* Botão para voltar à página anterior */}
-			<button type="button" onClick={handleGetBack} className="getBack">
-				<img src={arrowBack} alt="Voltar" /> voltar
-			</button>
+			<GetBack/>
 
 			<h1>Novo prato</h1>
 
@@ -191,7 +186,7 @@ export function NewDish() {
 							/>
 						))}
 
-						<Tags key="new-tag" isNew={true} onAddTag={handleAddTag} ref={tagsRef} />
+						<Tags isnew="true" onAddTag={handleAddTag} ref={tagsRef} />
 					</section>
 				</label>
 

@@ -4,9 +4,8 @@ export const Container = styled.main`
   min-height: 80svh;
   position: relative;
   padding-top: 4.4rem;
-
   .banner {
-    background-color: ${({ theme }) => theme.COLORS.GRADIENTS_200};
+    background-color: ${({ theme }) => theme.COLORS.BANNER_BACKGROUND};
     position: relative;
 
     margin-left: 3.6rem;
@@ -36,13 +35,24 @@ export const Container = styled.main`
   }
 
   .categories {
-    background-color: ${({ theme }) => theme.COLORS.DARK_400};
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
     position: relative;
     z-index: 100;
-
     padding-top: 6.2rem;
-    
+    .favoriteslink {
+    color: ${({ theme }) => theme.COLORS.FONT_600};font-size: 1.8rem;
+    font-weight: 600;
+    position: absolute;
+      z-index: 200;
+
+      right: 10%;
+      @media (min-width: 600px) {
+      font-size: 3.2rem;
+    }
   }
+  }
+
+
 
   @media (min-width: 1300px) {
     padding-top: 16.4rem;
@@ -70,8 +80,27 @@ export const Container = styled.main`
     }
   }
 
-  .categories {
-    margin-inline: 12.4rem;
+  .category {
+    margin-left: 12.4rem;
   }
   }
+`;
+
+// Estilos para o componente GradientOverlay
+export const GradientOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+  to right,
+  ${({ theme }) => theme.COLORS.BACKGROUND_500} 0%,
+  rgba(255, 255, 255, 0) 10%,
+  rgba(255, 255, 255, 0) 90%,
+  ${({ theme }) => theme.COLORS.BACKGROUND_500} 100%
+);
+
+  z-index: 10;
 `;

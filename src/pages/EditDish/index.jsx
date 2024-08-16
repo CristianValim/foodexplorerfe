@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
+import { GetBack } from "../../components/GetBack";
 import { Button } from "../../components/Button";
 import { FileInput } from "../../components/FileInput";
 import { Input } from "../../components/Input";
@@ -186,16 +187,10 @@ export function EditDish() {
 		}
 	};
 
-	function handleGetBack() {
-		window.history.back();
-	}
-	
 	return (
 		<Container>
 			{/* Botão para voltar à página anterior */}
-			<button type="button" onClick={handleGetBack} className="getBack">
-				<img src={arrowBack} alt="Voltar" /> voltar
-			</button>
+			<GetBack/>
 
 			<h1>Editar prato</h1>
 
@@ -239,19 +234,14 @@ export function EditDish() {
 				<label className="tagsLabel" htmlFor="tags">
 					Ingredientes
 					<section className="tagsSection">
-						{tags.map((tag) => (
+						{tags.map((tag, index) => (
 							<Tags
-								key={`tag-${tag.id}`}
+								key={`${tag.id}+${index}`}
 								tag={tag}
 								onRemoveTag={handleRemoveTag}
 							/>
 						))}
-						<Tags
-							key="new-tag"
-							isNew={true}
-							onAddTag={handleAddTag}
-							ref={tagsRef}
-						/>
+						<Tags isnew="true" onAddTag={handleAddTag} ref={tagsRef} />
 					</section>
 				</label>
 

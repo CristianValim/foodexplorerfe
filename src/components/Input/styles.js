@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  color: ${({ theme }) => theme.COLORS.LIGHT_400};
+  color: ${({ theme }) => theme.COLORS.FONT_400};
   font-family: ${({ theme }) => theme.FONTS.SECONDARY};
   font-size: 1.6rem;
   display: grid;
@@ -16,18 +16,27 @@ export const Container = styled.div`
   }
 
   input.textInput {
-    color: ${({ theme }) => theme.COLORS.LIGHT_500};
+    color: ${({ theme }) => theme.COLORS.FONT_400};
     padding: 1.6rem 1.4rem;
     margin-bottom: 2.4rem;
     border: none;
     border-radius: 0.8rem;
-    background-color: ${({ theme }) => theme.COLORS.DARK_800};
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
     &::placeholder {
-      color: ${({ theme }) => theme.COLORS.LIGHT_500};
-    }
-
-    @media (min-width: 600px) {
-      max-width: 45rem;
+      color: ${({ theme }) => theme.COLORS.FONT_200};
     }
   }
+
+
+    
+    @media (min-width: 600px) {
+      color: ${({ theme }) => theme.COLORS.FONT_100};
+
+      input.textInput {
+      max-width: 45rem;}
+
+
+    }
 `;
+
+

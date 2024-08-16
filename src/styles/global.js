@@ -25,9 +25,9 @@ export default createGlobalStyle`
   /* Estilos para o corpo */
   body {
     min-height: 100svh;
-    background-color: ${({ theme }) => theme.COLORS.DARK_400};
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
     font-family: ${({ theme }) => theme.FONTS.MAIN};
-    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    color: #FFFAF1;
   }
 
   /* Imagens e mídia responsivas */
@@ -83,7 +83,7 @@ export default createGlobalStyle`
   /* Estilos para botões */
   button {
     font-weight: medium;
-    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    color: ${({ theme }) => theme.COLORS.FONT_800};
     font-size: 1.4rem;
     line-height: 2.4rem;
     border: none;
@@ -98,6 +98,6 @@ export default createGlobalStyle`
   input:focus,
   button:focus,
   a:focus {
-    outline: 1px solid ${({ theme }) => theme.COLORS.LIGHT_100};
+    outline: 1px solid ${({ theme }) => theme.COLORS.FONT_800};
   }
 `;

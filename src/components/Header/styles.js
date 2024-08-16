@@ -7,7 +7,7 @@ export const Container = styled.header`
   min-height: 11.4rem;
   padding-top: 4.2rem;
   padding-inline: 1.6rem;
-  background-color: ${({ theme }) => theme.COLORS.DARK_700};
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
 
   .logo-wrapp {
     display: flex;
@@ -15,7 +15,7 @@ export const Container = styled.header`
     gap: 0.8rem;
     font-family: ${({ theme }) => theme.FONTS.SECONDARY};
     font-size: 1.2rem;
-    color: ${({ theme }) => theme.COLORS.CAKE_200};
+    color: ${({ theme }) => theme.COLORS.ADMIN};
     .logo {
       max-width: 16rem;
     }
@@ -23,7 +23,8 @@ export const Container = styled.header`
 
   .cart,
   .newDish {
-    background-color: ${({ theme }) => theme.COLORS.DARK_700};
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
+    color: ${({ theme }) => theme.COLORS.FONT_100};
     min-width: 4.8rem;
     min-height: 4.8rem;
     border-radius: 0.5rem;
@@ -50,7 +51,7 @@ export const Container = styled.header`
       border-radius: 50%;
       position: absolute;
       right: 0;
-      background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+      background-color: ${({ theme }) => theme.COLORS.BUTTON_BACKGROUND};
     }
   }
 
@@ -98,7 +99,7 @@ export const Container = styled.header`
 
     .cart,
     .newDish {
-      background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+      background-color: ${({ theme }) => theme.COLORS.BUTTON_BACKGROUND};
       border-radius: 0.5rem;
       display: flex;
       justify-content: center;

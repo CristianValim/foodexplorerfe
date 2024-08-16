@@ -1,13 +1,15 @@
-// 1. Bibliotecas externas
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import BounceLoader from "react-spinners/BounceLoader";
+// 1. Bibliotecas externas
+import { useEffect, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useNavigate, useParams } from "react-router-dom";
+import {Loader} from "../Loader";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
+import { Button } from "../Button";
 // 2. Componentes internos
 import { QuantitySelector } from "../QuantitySelector";
-import { Button } from "../Button";
-import { Container, LoadingContainer } from "./styles";
+import { Container } from "./styles";
 
 // 3. Hooks personalizados
 import { useAuth } from "../../hooks/auth";
@@ -18,9 +20,11 @@ import { useCart } from "../../contexts/CartContext";
 // 5. Utilitários e Helpers
 import { api } from "../../services/api";
 
+import { toast } from "react-toastify";
 // 6. Assets
 import arrowBack from "../../assets/icons/CaretLeft.svg";
 import receipt from "../../assets/icons/Receipt.svg";
+import { GetBack } from "../GetBack";
 
 export function DishDescription() {
 	const { id } = useParams(); // Pega o ID do prato dos parâmetros da URL
@@ -29,7 +33,7 @@ export function DishDescription() {
 	const { isAdmin } = useAuth(); // Verifica se o usuário é administrador
 	const navigate = useNavigate(); // Hook para navegação
 	const { addToCart } = useCart(); // Função para adicionar ao carrinho
-
+	
 	// Função para navegar para a página de edição do prato
 	function handleNavigateEdit() {
 		navigate(`/dishes/editdish/${id}`);
@@ -47,36 +51,35 @@ export function DishDescription() {
 		}
 	}
 
+	const convertPriceToNumber = (price) => {
+		return;
+	};
+
 	// useEffect para buscar os dados do prato ao carregar o componente
 	useEffect(() => {
 		const fetchDish = async () => {
 			try {
 				const response = await api.get(`/dishes/${id}`);
-				console.log("Dados do prato:", response.data);
-				setDish(response.data);
+				const dishWithConvertedPrice = {
+					...response.data,
+					price: Number.parseFloat(response.data.price.replace(",", ".")),
+				};
+
+				setDish(dishWithConvertedPrice);
 			} catch (error) {
-				console.error("Erro ao buscar o prato:", error);
+				toast.error("Erro ao buscar o prato:", error);
 			}
 		};
 
 		fetchDish();
 	}, [id]);
 
-	// Se os dados do prato ainda não foram carregados, mostra um loader
 	if (!dish) {
 		return (
-			<LoadingContainer>
-				<BounceLoader
-					size={150}
-					color="#82F3FF"
-					aria-label="Loading Spinner"
-					data-testid="loader"
+				<Loader
 				/>
-			</LoadingContainer>
 		);
 	}
-
-
 
 	return (
 		<AnimatePresence>
@@ -87,14 +90,16 @@ export function DishDescription() {
 				exit={{ opacity: 0 }}
 				transition={{ duration: 0.3 }}
 			>
-				<button type="button" onClick={handleNavigate} className="getBack">
-					<img src={arrowBack} alt="Voltar" /> voltar
-				</button>
+				<GetBack/>
+				
 				<div className="description">
-					<img
+					<LazyLoadImage
 						className="dishPicture"
 						src={`${api.defaults.baseURL}/files/${dish.image}`}
 						alt={dish.name}
+						effect="blur"
+						width="100%"
+						height="auto"
 					/>
 					<div className="text">
 						<h1 className="title">{dish.name}</h1>
@@ -113,7 +118,7 @@ export function DishDescription() {
 							<QuantitySelector quantity={quantity} setQuantity={setQuantity} />
 							<Button
 								img={receipt}
-								name={`pedir ${dish.price}`}
+								name={`Pedir R$ ${(dish.price * quantity).toFixed(2).replace(".", ",")}`}
 								onClick={handleAddToCart}
 							/>
 						</div>

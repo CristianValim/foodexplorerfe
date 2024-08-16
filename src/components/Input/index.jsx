@@ -7,6 +7,7 @@ export const Input = forwardRef(({
     placeholder,
     value,
     onChange,
+    style,
     onKeyDown,
     type,
     minLength
@@ -18,6 +19,7 @@ export const Input = forwardRef(({
                 {name}
                 {/* Campo de input */}
                 <input
+                style={style}
                     className="textInput"
                     type={type}
                     name={name}

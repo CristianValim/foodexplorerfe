@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: relative;
-  background-color: ${({ theme }) => theme.COLORS.DARK_200};
+  background-color: ${({ theme }) => theme.COLORS.CARD_BACKGROUND};
+  color: ${({ theme }) => theme.COLORS.FONT_100};
   width: 20rem;
   height: 30rem;
   border-radius: 0.8rem;
@@ -41,7 +42,6 @@ export const Container = styled.div`
     text-align: center;
 
     figcaption {
-      white-space: nowrap;
     }
 
     img {
@@ -59,7 +59,7 @@ export const Container = styled.div`
   }
 
   .price p {
-    color: ${({ theme }) => theme.COLORS.CAKE_200};
+    color: ${({ theme }) => theme.COLORS.ADMIN};
     font-family: ${({ theme }) => theme.FONTS.SECONDARY};
     font-size: 1.6rem;
   }

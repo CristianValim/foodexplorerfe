@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 // Estilização do componente Footer usando styled-components
 export const Container = styled.footer`
-  background-color: ${({ theme }) => theme.COLORS.DARK_700};
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+  color: ${({ theme }) => theme.COLORS.FONT_100};
   padding: 3rem;
   text-align: center;
   position: relative;
@@ -26,7 +27,7 @@ export const Container = styled.footer`
       font-family: ${({ theme }) => theme.FONTS.SECONDARY};
       font-size: 1.5rem;
       font-weight: 700;
-      color: ${({ theme }) => theme.COLORS.LIGHT_700};
+      color: ${({ theme }) => theme.COLORS.FONT_200};
 
       img {
         max-width: 2rem;

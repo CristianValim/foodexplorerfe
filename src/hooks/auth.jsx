@@ -1,6 +1,6 @@
 // 1. Bibliotecas externas
-import { createContext, useContext, useState, useEffect } from "react";
-
+import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 // 2. Utilitarios e helpers
 import { api } from "../services/api";
 
@@ -10,6 +10,7 @@ export const AuthContext = createContext({});
 // Componente AuthProvider
 function AuthProvider({ children }) {
 	const [data, setData] = useState({}); // Estado para armazenar os dados de autenticação (usuário e token)
+	const navigate = useNavigate(); // Hook de navegação
 
 	// Função assíncrona para realizar o login
 	async function signIn({ email, password }) {
@@ -20,7 +21,7 @@ function AuthProvider({ children }) {
 			localStorage.setItem("@FoodExplorer:user", JSON.stringify(user)); // Armazena o usuário no localStorage
 			localStorage.setItem("@FoodExplorer:token", token); // Armazena o token no localStorage
 
-			api.defaults.headers.common["Authorization"] = `Bearer ${token}`; // Define o token como padrão nas requisições
+			api.defaults.headers.common.Authorization = `Bearer ${token}`; // Define o token como padrão nas requisições
 
 			setData({ user, token }); // Atualiza o estado com os dados do usuário e token
 		} catch (error) {
@@ -36,8 +37,8 @@ function AuthProvider({ children }) {
 	function signOut() {
 		localStorage.removeItem("@FoodExplorer:user"); // Remove o usuário do localStorage
 		localStorage.removeItem("@FoodExplorer:token"); // Remove o token do localStorage
-
 		setData({}); // Reseta o estado de autenticação
+		navigate("/"); // Redireciona para a página inicial
 	}
 
 	// Função assíncrona para obter todos os pratos
@@ -69,13 +70,8 @@ function AuthProvider({ children }) {
 	}
 
 	async function addToFavorites(dish_id) {
-		try {
-			const response = await api.post("/users/favorite", { dish_id });
-			return response.data;
-		} catch (error) {
-			console.error("Error adding/removing favorite:", error);
-			throw error;
-		}
+		const response = await api.post("/users/favorite", { dish_id });
+		return response.data;
 	}
 
 	// useEffect para carregar os dados de autenticação do localStorage ao iniciar

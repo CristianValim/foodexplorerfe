@@ -3,7 +3,7 @@ import uploadIcon from "../../assets/icons/Upload.svg";
 
 // Container principal estilizado usando styled-components
 export const Container = styled.div`
-  color: ${({ theme }) => theme.COLORS.LIGHT_400};
+  color: ${({ theme }) => theme.COLORS.FONT_400};
   font-family: ${({ theme }) => theme.FONTS.SECONDARY};
   font-size: 1.6rem;
   display: grid;
@@ -19,21 +19,21 @@ export const Container = styled.div`
     margin-bottom: 2.4rem;
     border: none;
     border-radius: 0.8rem;
-    background-color: ${({ theme }) => theme.COLORS.DARK_800};
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
     background-image: url(${uploadIcon});
     background-repeat: no-repeat;
     background-position: 3rem 50%;
     padding-left: 6.5rem;
     font-family: ${({ theme }) => theme.FONTS.MAIN};
     font-size: 1.4rem;
-    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    color: ${({ theme }) => theme.COLORS.FONT_100};
     font-weight: 500;
     cursor: pointer;
     position: relative;
     display: block;
 
     &:hover {
-      background-color: ${({ theme }) => theme.COLORS.DARK_900};
+      background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
     }
   }
 
@@ -47,7 +47,7 @@ export const Container = styled.div`
     position: absolute;
     top: calc(100% - 2rem);
     right: 0;
-    background-color: ${({ theme }) => theme.COLORS.DARK_800};
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
     padding: 0.5rem;
     border-radius: 0.5rem;
     z-index: 10;

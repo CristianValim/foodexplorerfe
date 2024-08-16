@@ -6,6 +6,7 @@ import { api } from "../../services/api";
 
 import { useEffect, useState } from "react";
 import { SlMagnifier } from "react-icons/sl";
+import { toast } from "react-toastify";
 
 export function InputSearch({ placeholder, setOpen }) {
 	const [searchTerm, setSearchTerm] = useState(""); // Estado para armazenar o termo de busca
@@ -35,7 +36,7 @@ export function InputSearch({ placeholder, setOpen }) {
 			const data = response.data;
 			setSearchResults(data); // Atualiza os resultados da busca com os dados da API
 		} catch (error) {
-			console.error("Erro ao buscar pratos:", error);
+			toast.error("Erro ao buscar pratos:", error);
 		}
 	};
 

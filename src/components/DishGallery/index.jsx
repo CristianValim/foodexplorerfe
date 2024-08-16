@@ -1,4 +1,5 @@
 // 1. Bibliotecas externas
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
@@ -7,7 +8,7 @@ import "swiper/css/effect-fade";
 
 import { DishCard } from "../DishCard";
 // 2. Componentes internos
-import { Container, GradientOverlay } from "./styles";
+import { Container } from "./styles";
 
 import { useAuth } from "../../hooks/auth";
 // 3. Hooks personalizados
@@ -16,8 +17,11 @@ import { useIsMobile } from "../../hooks/useIsMobile";
 // 4. Utilitários e Helpers
 import { api } from "../../services/api";
 
-export function DishGallery() {
+export function DishGallery({ showFavorites = false }) {
+	const { id } = useParams();
+
 	const [dishes, setDishes] = useState([]); // Estado para armazenar os pratos
+	const [favorites, setFavorites] = useState([]); // Estado para armazenar os favoritos
 	const isMobile = useIsMobile(); // Hook para detectar se a visualização é móvel
 	const { getAllDishes } = useAuth(); // Função para obter todos os pratos
 
@@ -25,18 +29,36 @@ export function DishGallery() {
 	useEffect(() => {
 		const fetchDishes = async () => {
 			const data = await getAllDishes();
-			console.info("Received data:", data);
 			setDishes(data);
 		};
 
+		const fetchFavorites = async () => {
+			try {
+				const response = await api.get(`/users/favorites/${id}`);
+				setFavorites(response.data);
+			} catch (error) {
+				console.error("Error fetching favorites:", error);
+			}
+		};
+
 		fetchDishes();
-	}, [getAllDishes]);
+		if (showFavorites) {
+			fetchFavorites();
+		}
+	}, [getAllDishes, showFavorites]);
+
+	// Definir os pratos a serem exibidos (todos ou apenas favoritos)
+	const dishesToDisplay = showFavorites
+		? dishes.filter((dish) =>
+				favorites.some((favorite) => favorite.dish_id === dish.id)
+		  )
+		: dishes;
 
 	// Ordem personalizada das categorias
 	const customCategoryOrder = ["Refeições", "Bebidas", "Sobremesa"];
 
 	// Agrupar pratos por categoria
-	const categorizedDishes = dishes.reduce((acc, dish) => {
+	const categorizedDishes = dishesToDisplay.reduce((acc, dish) => {
 		if (!acc[dish.category]) {
 			acc[dish.category] = [];
 		}
@@ -51,7 +73,7 @@ export function DishGallery() {
 
 	return (
 		<Container>
-			{sortedCategories.map((category) => (
+			{sortedCategories.map((category, index) => (
 				<div key={category} className="category-section">
 					<h2 className="category">{category}</h2>
 					<div className="swiper-container">
@@ -72,7 +94,6 @@ export function DishGallery() {
 								</SwiperSlide>
 							))}
 						</Swiper>
-						<GradientOverlay />
 					</div>
 				</div>
 			))}

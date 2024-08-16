@@ -1,5 +1,8 @@
 // 1. Bibliotecas externas
 import { useEffect, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 import { api } from "../../services/api";
 
 import debounce from "lodash.debounce";
@@ -16,6 +19,7 @@ import { useIsMobile } from "../../hooks/useIsMobile";
 // 4. Contextos
 import { useCart } from "../../contexts/CartContext";
 
+import { Tooltip } from "react-tooltip";
 // 6. Assets
 import heart from "../../assets/icons/Heart.svg";
 import heartFilled from "../../assets/icons/HeartFilled.svg";
@@ -60,7 +64,7 @@ export function DishCard({ id, image, description, price, dish }) {
 					setIsActive(isFavorite);
 				}
 			} catch (error) {
-				console.error("Error fetching favorites:", error);
+				toast.error("Erro ao buscar favoritos");
 			}
 		};
 
@@ -87,27 +91,55 @@ export function DishCard({ id, image, description, price, dish }) {
 			{/* Botão de favorito, escondido se o usuário for administrador */}
 			<button
 				type="button"
-				className="favorite"
-				onClick={handleFavorite}
-				style={{ display: isAdmin ? "none" : "block" }}
-				disabled={loading} // Desabilitar botão durante o carregamento
+				className={isAdmin ? "edit" : "favorite"}
+				onClick={isAdmin ? handleNavigate : handleFavorite}
+				style={{ display: "block" }}
+				disabled={loading}
+				data-tooltip-id="my-tooltip"
+				data-tooltip-content={
+					isAdmin
+						? "Editar Prato"
+						: isActive
+							? "Remover Favorito"
+							: "Adicionar Favorito"
+				}
 			>
-				<img src={isActive ? heartFilled : heart} alt="Favoritar" />
-			</button>
-			{/* Botão de editar, visível apenas se o usuário for administrador */}
-			<button
-				type="button"
-				className="edit"
-				onClick={handleNavigate}
-				style={{ display: isAdmin ? "block" : "none" }}
-			>
-				<img src={editPencil} alt="Editar" />
+				<img
+					src={isAdmin ? editPencil : isActive ? heartFilled : heart}
+					alt={
+						isAdmin
+							? "Editar"
+							: isActive
+								? "Remover dos Favoritos"
+								: "Adicionar aos Favoritos"
+					}
+				/>
+
+				<Tooltip
+					id="my-tooltip"
+					place="right"
+					style={{
+						fontSize: "1.2rem",
+						maxWidth: "20rem",
+						textAlign: "center",
+					}}
+				/>
 			</button>
 
 			{/* Imagem do prato e link para detalhes */}
 			<figure>
 				<Link className="image" to={`/dishes/${id}`}>
-					<img src={image} alt={description} />
+					<LazyLoadImage
+						src={image}
+						alt={description}
+						loading="lazy"
+						width="100%"
+						height="100%"
+						effect="blur"
+						wrapperProps={{
+							style: {transitionDelay: "500ms"},
+						}}
+					/>
 				</Link>
 				<figcaption>
 					<Link to={`/dishes/${id}`}>

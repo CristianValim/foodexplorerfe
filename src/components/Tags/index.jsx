@@ -7,7 +7,7 @@ import { Container } from "./styles";
 
 // Componente Tags
 export const Tags = forwardRef(
-	({ isNew, onAddTag, onRemoveTag, tag, ...props }, ref) => {
+	({ isnew, onAddTag, onRemoveTag, tag, ...props }, ref) => {
 		const [newTag, setNewTag] = useState("");
 
 		// Função para adicionar uma nova tag
@@ -19,12 +19,12 @@ export const Tags = forwardRef(
 		}
 
 		return (
-			<Container $isNew={isNew} {...props} ref={ref} >
+			<Container isnew={isnew} ref={ref}>
 				{/* Campo de input para adicionar ou exibir uma tag */}
 				<input
 					type="text"
-					value={isNew ? newTag : tag}
-					readOnly={!isNew}
+					value={isnew ? newTag : tag}
+					readOnly={!isnew}
 					placeholder="Adicionar"
 					onChange={(e) => setNewTag(e.target.value)}
 					onKeyDown={(e) => {
@@ -39,14 +39,14 @@ export const Tags = forwardRef(
 				<button
 					type="button"
 					onClick={() => {
-						if (isNew) {
+						if (isnew) {
 							handleAddTag();
 						} else {
 							onRemoveTag(tag);
 						}
 					}}
 				>
-					{isNew ? <FiPlus size={15} /> : <FiX size={15} />}
+					{isnew ? <FiPlus size={15} /> : <FiX size={15} />}
 				</button>
 			</Container>
 		);

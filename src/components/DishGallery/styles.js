@@ -4,9 +4,9 @@ import styled from "styled-components";
 
 // Estilos para o componente Container
 export const Container = styled.div`
-  margin-bottom: 2.4rem;
   position: relative;
   width: 100%;
+  color: ${({ theme }) => theme.COLORS.FONT_600};
 
   .swiper-container {
     position: relative;
@@ -26,22 +26,4 @@ export const Container = styled.div`
       font-size: 3.2rem;
     }
   }
-`;
-
-// Estilos para o componente GradientOverlay
-export const GradientOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  background: linear-gradient(
-    to right,
-    #00070a 0%,
-    rgba(255, 255, 255, 0) 10%,
-    rgba(255, 255, 255, 0) 90%,
-    #00070a 100%
-  );
-  z-index: 10;
 `;

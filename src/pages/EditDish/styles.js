@@ -3,21 +3,11 @@ import Select_down from "../../assets/icons/Select_down.svg";
 
 export const Container = styled.div`
   font-family: ${({ theme }) => theme.FONTS.SECONDARY};
+  color: ${({ theme }) => theme.COLORS.FONT_400};
+
   min-height: 85dvh;
   padding-bottom: 5.3rem;
   margin-inline: 10%;
-
-  .getBack {
-    font-size: 1.6rem;
-    display: flex;
-    align-items: center;
-    margin-top: 1.1rem;
-
-    img {
-      width: 2.2rem;
-      height: 1.5rem;
-    }
-  }
 
   h1 {
     font-family: ${({ theme }) => theme.FONTS.MAIN};
@@ -26,7 +16,7 @@ export const Container = styled.div`
     font-size: 3.2rem;
   }
   #dishCategory select {
-    background-color: ${({ theme }) => theme.COLORS.DARK_900};
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
   }
 
   .dishCategory,
@@ -35,22 +25,22 @@ export const Container = styled.div`
   .description {
     font-size: 1.6rem;
     font-family: ${({ theme }) => theme.FONTS.SECONDARY};
-    color: ${({ theme }) => theme.COLORS.LIGHT_400};
+    color: ${({ theme }) => theme.COLORS.FONT_600};
 
     .categoryOptions,
     .inputPrice,
     textarea {
       width: 100%;
-      color: ${({ theme }) => theme.COLORS.LIGHT_500};
+      color: ${({ theme }) => theme.COLORS.FONT_100};
       padding: 1.6rem 1.4rem;
       margin: 0.8rem auto 2.4rem;
 
       border: none;
       border-radius: 0.8rem;
-      background-color: ${({ theme }) => theme.COLORS.DARK_800};
+      background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
       resize: none;
       &::placeholder {
-        color: ${({ theme }) => theme.COLORS.LIGHT_500};
+        color: ${({ theme }) => theme.COLORS.FONT_100};
       }
     }
 
@@ -65,8 +55,8 @@ export const Container = styled.div`
     }
 
     .tagsSection {
-      color: ${({ theme }) => theme.COLORS.LIGHT_500};
-      background-color: ${({ theme }) => theme.COLORS.DARK_800};
+      color: ${({ theme }) => theme.COLORS.FONT_100};
+      background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
       border-radius: 0.8rem;
 
       padding: 1.6rem 1.4rem;

@@ -6,7 +6,6 @@ import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { useAuth } from "../hooks/auth";
 import { EditDish } from "../pages/EditDish";
-import { Favorites } from "../pages/Favorites";
 import { NewDish } from "../pages/NewDish";
 
 export function AppRoutes() {
@@ -20,7 +19,6 @@ export function AppRoutes() {
 				<Route path="/dishes/newdish" element={<NewDish />} />
 				<Route path="/dishes/editdish/:id" element={<EditDish />} />
 				<Route path="/dishes/:id" element={<DishDescription />} />
-				<Route path="/favorites" element={<Favorites />} />{" "}
 			</Routes>
 			<Footer />
 		</>
