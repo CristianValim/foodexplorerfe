@@ -16,7 +16,7 @@ export const Container = styled.div`
   }
 
   input.textInput {
-    color: ${({ theme }) => theme.COLORS.FONT_400};
+    color: ${({ theme }) => theme.COLORS.FONT_100};
     padding: 1.6rem 1.4rem;
     margin-bottom: 2.4rem;
     border: none;

@@ -1,6 +1,7 @@
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 // 1. Bibliotecas externas
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 import "swiper/css";
@@ -50,8 +51,8 @@ export function DishGallery({ showFavorites = false }) {
 	// Definir os pratos a serem exibidos (todos ou apenas favoritos)
 	const dishesToDisplay = showFavorites
 		? dishes.filter((dish) =>
-				favorites.some((favorite) => favorite.dish_id === dish.id)
-		  )
+				favorites.some((favorite) => favorite.dish_id === dish.id),
+			)
 		: dishes;
 
 	// Ordem personalizada das categorias
@@ -73,30 +74,51 @@ export function DishGallery({ showFavorites = false }) {
 
 	return (
 		<Container>
-			{sortedCategories.map((category, index) => (
-				<div key={category} className="category-section">
-					<h2 className="category">{category}</h2>
-					<div className="swiper-container">
-						<Swiper
-							slidesPerView={isMobile ? 2 : 3.5}
-							loop={true}
-							spaceBetween={50}
+			<AnimatePresence>
+				{showFavorites && dishesToDisplay.length === 0 ? (
+					<motion.div
+						key="favorites-message"
+						initial={{ opacity: 0, y: 10 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -10 }}
+						transition={{ duration: 0 }}
+					>
+						<p className="favorites">Aqui ficarão seus pratos favoritos :)</p>
+					</motion.div>
+				) : (
+					sortedCategories.map((category) => (
+						<motion.div
+							key={category}
+							initial={{ opacity: 0, y: 10 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: -10 }}
+							transition={{ duration: 0.3 }}
+							className="category-section"
 						>
-							{categorizedDishes[category].map((dish) => (
-								<SwiperSlide key={`${category}-${dish.id}`}>
-									<DishCard
-										id={dish.id}
-										dish={dish.name}
-										image={`${api.defaults.baseURL}/files/${dish.image}`}
-										description={dish.description}
-										price={dish.price}
-									/>
-								</SwiperSlide>
-							))}
-						</Swiper>
-					</div>
-				</div>
-			))}
+							<h2 className="category">{category}</h2>
+							<div className="swiper-container">
+								<Swiper
+									slidesPerView={isMobile ? 2 : 3.5}
+									loop={true}
+									spaceBetween={50}
+								>
+									{categorizedDishes[category].map((dish) => (
+										<SwiperSlide key={`${category}-${dish.id}`}>
+											<DishCard
+												id={dish.id}
+												dish={dish.name}
+												image={`${api.defaults.baseURL}/files/${dish.image}`}
+												description={dish.description}
+												price={dish.price}
+											/>
+										</SwiperSlide>
+									))}
+								</Swiper>
+							</div>
+						</motion.div>
+					))
+				)}
+			</AnimatePresence>
 		</Container>
 	);
 }

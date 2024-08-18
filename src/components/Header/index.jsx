@@ -104,7 +104,7 @@ export function Header({ isAdmin }) {
 			<button
 				type="button"
 				className="cart"
-				style={{ display: isAdmin ? "none" : "flex" }}
+				style={{ display: isAdmin ? "none" : isMobile ? "grid" : "flex" }}
 			>
 				<img src={cart} alt="Carrinho" />
 				<span className="desktop">Pedidos</span>

@@ -19,7 +19,6 @@ import { useIsMobile } from "../../hooks/useIsMobile";
 // 4. Contextos
 import { useCart } from "../../contexts/CartContext";
 
-import { Tooltip } from "react-tooltip";
 // 6. Assets
 import heart from "../../assets/icons/Heart.svg";
 import heartFilled from "../../assets/icons/HeartFilled.svg";
@@ -95,14 +94,6 @@ export function DishCard({ id, image, description, price, dish }) {
 				onClick={isAdmin ? handleNavigate : handleFavorite}
 				style={{ display: "block" }}
 				disabled={loading}
-				data-tooltip-id="my-tooltip"
-				data-tooltip-content={
-					isAdmin
-						? "Editar Prato"
-						: isActive
-							? "Remover Favorito"
-							: "Adicionar Favorito"
-				}
 			>
 				<img
 					src={isAdmin ? editPencil : isActive ? heartFilled : heart}
@@ -113,16 +104,6 @@ export function DishCard({ id, image, description, price, dish }) {
 								? "Remover dos Favoritos"
 								: "Adicionar aos Favoritos"
 					}
-				/>
-
-				<Tooltip
-					id="my-tooltip"
-					place="right"
-					style={{
-						fontSize: "1.2rem",
-						maxWidth: "20rem",
-						textAlign: "center",
-					}}
 				/>
 			</button>
 
@@ -148,7 +129,7 @@ export function DishCard({ id, image, description, price, dish }) {
 				</figcaption>
 				<span
 					className="description"
-					style={{ display: isMobile ? "none" : "block" }}
+					style={{ display: isMobile ? "none" : "block", overflow: "hidden" }}
 				>
 					{description}
 				</span>

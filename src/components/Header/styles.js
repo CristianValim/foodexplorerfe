@@ -23,6 +23,7 @@ export const Container = styled.header`
 
   .cart,
   .newDish {
+
     background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
     color: ${({ theme }) => theme.COLORS.FONT_100};
     min-width: 4.8rem;

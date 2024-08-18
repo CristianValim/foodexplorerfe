@@ -15,7 +15,17 @@ export const Container = styled.div`
   &:hover {
     cursor: default;
   }
+  .favorites {
+        font-size: 2rem;
+        text-align: center;
+        margin: 10rem 30%;
 
+        @media (min-width: 600px) {
+          text-align: start;
+          font-size: 4rem;
+          margin: 4rem 5%;
+        }
+      }
   .category {
     font-size: 1.8rem;
     font-weight: 600;
@@ -24,6 +34,8 @@ export const Container = styled.div`
 
     @media (min-width: 600px) {
       font-size: 3.2rem;
+
+
     }
   }
 `;

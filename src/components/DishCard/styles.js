@@ -14,6 +14,7 @@ export const Container = styled.div`
   margin-bottom: 3rem;
   padding: 2.4rem;
   font-size: 1.4rem;
+    overflow: hidden;
 
   .favorite,
   .edit {

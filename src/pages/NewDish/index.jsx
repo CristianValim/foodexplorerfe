@@ -227,7 +227,7 @@ export function NewDish() {
 				{/* Botão para salvar alterações */}
 				<Button
 					type="submit"
-					name="salvar alteracoes"
+					name="Salvar alterações"
 					onClick={handleNewDish}
 				/>
 			</form>

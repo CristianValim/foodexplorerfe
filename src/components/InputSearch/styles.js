@@ -17,7 +17,7 @@ export const Container = styled.div`
     
     width: 100%;
     padding: 1.6rem 4.4rem 1.6rem 5.2rem;
-    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
     border: none;
     border-radius: 0.8rem;
     color: ${({ theme }) => theme.COLORS.FONT_100};
@@ -47,6 +47,7 @@ export const Container = styled.div`
   .search-results li {
     padding: 8px 16px;
     cursor: pointer;
+    color: ${({ theme }) => theme.COLORS.FONT_100};
 
     span {
       outline: none;

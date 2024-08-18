@@ -37,6 +37,7 @@ export const Container = styled.main`
   .categories {
     background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
     position: relative;
+    min-height: 40dvh;
     z-index: 100;
     padding-top: 6.2rem;
     .favoriteslink {

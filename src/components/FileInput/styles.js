@@ -58,6 +58,8 @@ export const Container = styled.div`
       display: block;
       aspect-ratio: 1;
       object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid ${({ theme }) => theme.COLORS.BACKGROUND_500};
     }
   }
 `;

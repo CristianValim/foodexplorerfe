@@ -39,9 +39,11 @@ export function FileInput({ name, onChange }) {
 			<span>Imagem do prato</span>
 			<div
 				className="image-preview"
-				style={{ display: hovering ? "block" : "none" }}
+				style={{
+					display: preview ? (hovering ? "block" : "none") : "none",
+				}}
 			>
-				<img src={preview} alt="Preview" />
+				{preview && <img src={preview} alt="Preview" />}
 			</div>
 			<label
 				onMouseEnter={handleMouseEnter}
