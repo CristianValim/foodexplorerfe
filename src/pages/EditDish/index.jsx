@@ -1,26 +1,18 @@
-// 1. Bibliotecas externas
 import { useEffect, useRef, useState } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import CurrencyInput from "react-currency-input-field";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-confirm-alert/src/react-confirm-alert.css";
-
-import { GetBack } from "../../components/GetBack";
 import { Button } from "../../components/Button";
 import { FileInput } from "../../components/FileInput";
+import { GetBack } from "../../components/GetBack";
 import { Input } from "../../components/Input";
 import { Tags } from "../../components/Tags";
 import { ValidationErrorToast } from "../../components/ValidationErrorToast";
-// 2. Componentes internos
+import { api } from "../../services/api";
 import { Container } from "./styles";
 import { CustomConfirmAlert } from "./styles";
-
-// 3. Utilitários e Helpers
-import { api } from "../../services/api";
-
-// 4. Assets
-import arrowBack from "../../assets/icons/CaretLeft.svg";
 
 export function EditDish() {
 	const { id } = useParams(); // Obtém o ID do prato da URL
@@ -190,7 +182,7 @@ export function EditDish() {
 	return (
 		<Container>
 			{/* Botão para voltar à página anterior */}
-			<GetBack/>
+			<GetBack />
 
 			<h1>Editar prato</h1>
 

@@ -28,6 +28,7 @@ export default createGlobalStyle`
     background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
     font-family: ${({ theme }) => theme.FONTS.MAIN};
     color: #FFFAF1;
+    position: relative;
   }
 
   /* Imagens e mídia responsivas */

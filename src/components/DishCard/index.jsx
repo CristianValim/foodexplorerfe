@@ -1,28 +1,18 @@
-// 1. Bibliotecas externas
 import { useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-
-import { api } from "../../services/api";
-
 import debounce from "lodash.debounce";
-// 2. Componentes internos
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../Button";
-import { QuantitySelector } from "../QuantitySelector";
-import { Container } from "./styles";
-
-import { useAuth } from "../../hooks/auth";
-// 3. Hooks personalizados
-import { useIsMobile } from "../../hooks/useIsMobile";
-
-// 4. Contextos
-import { useCart } from "../../contexts/CartContext";
-
-// 6. Assets
 import heart from "../../assets/icons/Heart.svg";
 import heartFilled from "../../assets/icons/HeartFilled.svg";
 import editPencil from "../../assets/icons/Pencil.svg";
+import { useCart } from "../../contexts/CartContext";
+import { useAuth } from "../../hooks/auth";
+import { useIsMobile } from "../../hooks/useIsMobile";
+import { api } from "../../services/api";
+import { Button } from "../Button";
+import { QuantitySelector } from "../QuantitySelector";
+import { Container } from "./styles";
 
 export function DishCard({ id, image, description, price, dish }) {
 	// Estado para controlar o favorito e a quantidade
@@ -118,7 +108,7 @@ export function DishCard({ id, image, description, price, dish }) {
 						height="100%"
 						effect="blur"
 						wrapperProps={{
-							style: {transitionDelay: "500ms"},
+							style: { transitionDelay: "500ms" },
 						}}
 					/>
 				</Link>

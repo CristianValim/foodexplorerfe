@@ -1,23 +1,15 @@
-// 1. Bibliotecas externas
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
-// 2. Componentes internos
-import { Container } from "./styles";
-import { Input } from "../../components/Input";
-import { Button } from "../../components/Button";
-
-// 3. Hooks personalizados
-import { useAuth } from "../../hooks/auth";
-import { useTheme } from "../../contexts/ThemeContext";
-
-// 4. Utilitários e Helpers
-import { api } from "../../services/api";
-
-// 5. Assets
 import logo from "../../assets/icons/logo.svg";
+import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
+import { useTheme } from "../../contexts/ThemeContext";
+import { useAuth } from "../../hooks/auth";
+import { api } from "../../services/api";
+import { Container } from "./styles";
 
 export function SignInUp({ mode }) {
 	// Funções de autenticação do hook personalizado
@@ -95,7 +87,17 @@ export function SignInUp({ mode }) {
 		<AnimatePresence wait>
 			<Container>
 				{/* Logo da aplicação */}
-				<img className="logo" src={logo} alt="Logo Food Explorer"style={{ filter: theme === "light" ? "brightness(0) saturate(100%) invert(31%) sepia(43%) saturate(1012%) hue-rotate(307deg) brightness(99%) contrast(75%)" : "none" }} />
+				<img
+					className="logo"
+					src={logo}
+					alt="Logo Food Explorer"
+					style={{
+						filter:
+							theme === "light"
+								? "brightness(0) saturate(100%) invert(31%) sepia(43%) saturate(1012%) hue-rotate(307deg) brightness(99%) contrast(75%)"
+								: "none",
+					}}
+				/>
 				<motion.div
 					className="auto"
 					key={authMode ? "createAccount" : "signIn"}
@@ -111,7 +113,7 @@ export function SignInUp({ mode }) {
 				>
 					<main className="wrapper">
 						<h1>{authMode ? "Crie sua conta" : "Faça login"}</h1>
-						
+
 						{/* Input para o nome (aparece apenas no modo de cadastro) */}
 						{authMode && (
 							<Input
@@ -152,17 +154,17 @@ export function SignInUp({ mode }) {
 						<Link to={authMode ? "/" : "/signup"}>
 							{authMode ? "Já tenho uma conta" : "Criar uma conta"}
 						</Link>
-							</main>
-						</motion.div>
-					<DarkModeSwitch
+					</main>
+				</motion.div>
+				<DarkModeSwitch
 					className="DarkModeSwitch"
-					style={{ marginLeft: "auto" , marginRight: "1rem" }}
+					style={{ marginLeft: "auto", marginRight: "1rem" }}
 					checked={theme === "light"}
 					onChange={toggleTheme}
 					moonColor="#750310"
 					sunColor="#FFFAF1"
 					size={40}
-					/>
+				/>
 			</Container>
 		</AnimatePresence>
 	);

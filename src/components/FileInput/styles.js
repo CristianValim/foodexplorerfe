@@ -9,7 +9,7 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.8rem;
-  width: 100%;
+  width: 100%; 
   border-radius: 0.8rem;
   position: relative;
 
@@ -20,9 +20,11 @@ export const Container = styled.div`
     border: none;
     border-radius: 0.8rem;
     background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
+    background-image: url(https://encurtador.com.br/F1JBF);
     background-image: url(${uploadIcon});
     background-repeat: no-repeat;
     background-position: 3rem 50%;
+    background-size: 2rem;
     padding-left: 6.5rem;
     font-family: ${({ theme }) => theme.FONTS.MAIN};
     font-size: 1.4rem;

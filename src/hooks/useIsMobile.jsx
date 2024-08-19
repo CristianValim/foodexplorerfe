@@ -1,7 +1,5 @@
-// Importações de hooks do React
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-// Hook personalizado para detectar se a tela é mobile
 export function useIsMobile(breakpoint = 900) {
 	// 1. Estado inicial para determinar se a largura da janela é menor que o breakpoint
 	const [isMobile, setIsMobile] = useState(window.innerWidth < breakpoint);

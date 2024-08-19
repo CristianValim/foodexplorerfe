@@ -6,9 +6,8 @@ export const Container = styled.footer`
   color: ${({ theme }) => theme.COLORS.FONT_100};
   padding: 3rem;
   text-align: center;
-  position: relative;
-  bottom: 0;
-  
+  height: 10rem;
+
   section {
     display: flex;
     justify-content: space-between;

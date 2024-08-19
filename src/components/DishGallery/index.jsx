@@ -1,22 +1,15 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-// 1. Bibliotecas externas
 import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 import "swiper/css";
 import "swiper/css/effect-fade";
-
-import { DishCard } from "../DishCard";
-// 2. Componentes internos
-import { Container } from "./styles";
-
 import { useAuth } from "../../hooks/auth";
-// 3. Hooks personalizados
 import { useIsMobile } from "../../hooks/useIsMobile";
-
-// 4. Utilitários e Helpers
 import { api } from "../../services/api";
+import { DishCard } from "../DishCard";
+import { Container } from "./styles";
 
 export function DishGallery({ showFavorites = false }) {
 	const { id } = useParams();
@@ -46,7 +39,7 @@ export function DishGallery({ showFavorites = false }) {
 		if (showFavorites) {
 			fetchFavorites();
 		}
-	}, [getAllDishes, showFavorites]);
+	}, [getAllDishes, showFavorites, id]);
 
 	// Definir os pratos a serem exibidos (todos ou apenas favoritos)
 	const dishesToDisplay = showFavorites

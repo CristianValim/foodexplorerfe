@@ -1,10 +1,6 @@
-// 1. Bibliotecas externas
 import { useState } from "react";
-
-// 2. Componentes internos
 import { Container } from "./styles.js";
 
-// Componente funcional FileInput
 export function FileInput({ name, onChange }) {
 	const [preview, setPreview] = useState(null);
 	const [hovering, setHovering] = useState(false);

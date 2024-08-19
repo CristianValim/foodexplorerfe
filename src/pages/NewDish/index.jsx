@@ -1,22 +1,14 @@
-// 1. Bibliotecas externas
 import { useRef, useState } from "react";
 import CurrencyInput from "react-currency-input-field";
 import { toast } from "react-toastify";
-
 import { Button } from "../../components/Button";
 import { FileInput } from "../../components/FileInput";
+import { GetBack } from "../../components/GetBack";
 import { Input } from "../../components/Input";
 import { Tags } from "../../components/Tags";
 import { ValidationErrorToast } from "../../components/ValidationErrorToast";
-// 2. Componentes internos
-import { Container } from "./styles";
-
-// 3. Utilitários e Helpers
 import { api } from "../../services/api";
-
-// 4. Assets
-import arrowBack from "../../assets/icons/CaretLeft.svg";
-import { GetBack } from "../../components/GetBack";
+import { Container } from "./styles";
 
 export function NewDish() {
 	// Estado para armazenar informações do prato
@@ -132,9 +124,9 @@ export function NewDish() {
 	};
 
 	return (
-		<Container > 
+		<Container>
 			{/* Botão para voltar à página anterior */}
-			<GetBack/>
+			<GetBack />
 
 			<h1>Novo prato</h1>
 

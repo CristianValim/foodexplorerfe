@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
-  min-height: 80svh;
+  min-height: calc(100svh - 22rem);
   position: relative;
   padding-top: 4.4rem;
   .banner {

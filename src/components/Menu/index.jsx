@@ -1,4 +1,3 @@
-// 1. Bibliotecas externas
 import { Twirl as Hamburger } from "hamburger-react";
 import { useState } from "react";
 import { FaRegCircleQuestion } from "react-icons/fa6";
@@ -7,22 +6,17 @@ import Switch from "react-switch";
 import { toast } from "react-toastify";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { Tooltip } from "react-tooltip";
-
-// 2. Componentes internos
+import { useTheme } from "../../contexts/ThemeContext";
+import { useAuth } from "../../hooks/auth";
 import { Footer } from "../Footer";
 import { InputSearch } from "../InputSearch";
 import { Container } from "./styles";
 
-// 3. Hooks personalizados
-import { useAuth } from "../../hooks/auth";
-import { useTheme } from "../../contexts/ThemeContext";
-
-// Componente Menu
 export function Menu({ isOpen, setOpen }) {
 	const { signOut, user, updateUserRole, isAdmin } = useAuth(); // Hook de autenticação
 	const [isGodMode, setIsGodMode] = useState(user.role === "admin"); // Estado para GodMode
 	const { theme, toggleTheme } = useTheme(); // Use o contexto de tema
-	
+
 	// Função para lidar com cliques em links
 	function handleLinkClick() {
 		setOpen(false);
@@ -54,7 +48,7 @@ export function Menu({ isOpen, setOpen }) {
 				/>
 				<h1>Menu</h1>
 				<DarkModeSwitch
-					style={{ marginLeft: "auto" , marginRight: "1rem" }}
+					style={{ marginLeft: "auto", marginRight: "1rem" }}
 					checked={theme === "light"}
 					onChange={toggleTheme}
 					moonColor="#FFFAF1"
@@ -70,10 +64,10 @@ export function Menu({ isOpen, setOpen }) {
 				{/* Link para adicionar novo prato, visível apenas para administradores */}
 				{isAdmin && (
 					<>
-					<Link to="/dishes/newdish" onClick={handleLinkClick}>
-						Novo Prato
-					</Link>
-					<span />
+						<Link to="/dishes/newdish" onClick={handleLinkClick}>
+							Novo Prato
+						</Link>
+						<span />
 					</>
 				)}
 

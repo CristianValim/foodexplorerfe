@@ -1,11 +1,7 @@
-// 1. Bibliotecas externas
 import { forwardRef, useState } from "react";
 import { FiPlus, FiX } from "react-icons/fi";
-
-// 2. Componentes internos
 import { Container } from "./styles";
 
-// Componente Tags
 export const Tags = forwardRef(
 	({ isnew, onAddTag, onRemoveTag, tag, ...props }, ref) => {
 		const [newTag, setNewTag] = useState("");

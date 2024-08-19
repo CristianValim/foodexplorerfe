@@ -9,5 +9,4 @@ export const Container = styled.button`
     font-size: 2.4rem;
     display: flex;
     align-items: center;
-    margin-top: 2rem;
 `;

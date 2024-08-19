@@ -1,30 +1,20 @@
 import { AnimatePresence, motion } from "framer-motion";
-// 1. Bibliotecas externas
 import { useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useNavigate, useParams } from "react-router-dom";
-import {Loader} from "../Loader";
+import { Loader } from "../Loader";
 import "react-lazy-load-image-component/src/effects/blur.css";
-
-import { Button } from "../Button";
-// 2. Componentes internos
-import { QuantitySelector } from "../QuantitySelector";
-import { Container } from "./styles";
-
-// 3. Hooks personalizados
-import { useAuth } from "../../hooks/auth";
-
-// 4. Contextos
-import { useCart } from "../../contexts/CartContext";
-
-// 5. Utilitários e Helpers
-import { api } from "../../services/api";
-
 import { toast } from "react-toastify";
 // 6. Assets
 import arrowBack from "../../assets/icons/CaretLeft.svg";
 import receipt from "../../assets/icons/Receipt.svg";
+import { useCart } from "../../contexts/CartContext";
+import { useAuth } from "../../hooks/auth";
+import { api } from "../../services/api";
+import { Button } from "../Button";
 import { GetBack } from "../GetBack";
+import { QuantitySelector } from "../QuantitySelector";
+import { Container } from "./styles";
 
 export function DishDescription() {
 	const { id } = useParams(); // Pega o ID do prato dos parâmetros da URL
@@ -33,7 +23,7 @@ export function DishDescription() {
 	const { isAdmin } = useAuth(); // Verifica se o usuário é administrador
 	const navigate = useNavigate(); // Hook para navegação
 	const { addToCart } = useCart(); // Função para adicionar ao carrinho
-	
+
 	// Função para navegar para a página de edição do prato
 	function handleNavigateEdit() {
 		navigate(`/dishes/editdish/${id}`);
@@ -75,10 +65,7 @@ export function DishDescription() {
 	}, [id]);
 
 	if (!dish) {
-		return (
-				<Loader
-				/>
-		);
+		return <Loader />;
 	}
 
 	return (
@@ -90,8 +77,8 @@ export function DishDescription() {
 				exit={{ opacity: 0 }}
 				transition={{ duration: 0.3 }}
 			>
-				<GetBack/>
-				
+				<GetBack />
+
 				<div className="description">
 					<LazyLoadImage
 						className="dishPicture"

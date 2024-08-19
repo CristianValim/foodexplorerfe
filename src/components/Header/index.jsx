@@ -1,30 +1,22 @@
 import { AnimatePresence } from "framer-motion";
 import { Twirl as Hamburger } from "hamburger-react";
-// 1. Bibliotecas externas
 import { useEffect, useState } from "react";
 import { FaRegCircleQuestion } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Switch from "react-switch";
 import { toast } from "react-toastify";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { Tooltip } from "react-tooltip";
-
-import { InputSearch } from "../InputSearch";
-import { Menu } from "../Menu";
-// 2. Componentes internos
-import { Container } from "./styles";
-
-// 4. Contextos
-import { useCart } from "../../contexts/CartContext";
-import { useTheme } from "../../contexts/ThemeContext";
-// 3. Hooks personalizados
-import { useAuth } from "../../hooks/auth";
-import { useIsMobile } from "../../hooks/useIsMobile";
-
 import cart from "../../assets/icons/Receipt.svg";
 import signout from "../../assets/icons/SignOut.svg";
-// 5. Assets
 import logo from "../../assets/icons/logo.svg";
+import { useCart } from "../../contexts/CartContext";
+import { useTheme } from "../../contexts/ThemeContext";
+import { useAuth } from "../../hooks/auth";
+import { useIsMobile } from "../../hooks/useIsMobile";
+import { InputSearch } from "../InputSearch";
+import { Menu } from "../Menu";
+import { Container } from "./styles";
 
 export function Header({ isAdmin }) {
 	const { updateUserRole, signOut, user } = useAuth(); // Hook useAuth para autenticação e controle de usuário
@@ -35,7 +27,7 @@ export function Header({ isAdmin }) {
 
 	const [isGodMode, setIsGodMode] = useState(user.role === "admin"); // Estado para controlar o modo administrador (GodMode)
 	const isMobile = useIsMobile(); // Hook useIsMobile para detectar se o dispositivo é mobile
-
+	const navigate = useNavigate();
 	// Função assíncrona para lidar com a mudança de modo GodMode
 	const handleGodModeChange = async (checked) => {
 		setIsGodMode(checked); // Atualiza o estado de GodMode
@@ -67,6 +59,9 @@ export function Header({ isAdmin }) {
 		body.style.overflow = isOpen ? "hidden" : "auto";
 	}, [isOpen]);
 
+	function navigateToCart() {
+		navigate("/cart");
+	}
 	return (
 		<Container>
 			<div className="hamburguer">
@@ -105,6 +100,7 @@ export function Header({ isAdmin }) {
 				type="button"
 				className="cart"
 				style={{ display: isAdmin ? "none" : isMobile ? "grid" : "flex" }}
+				onClick={navigateToCart}
 			>
 				<img src={cart} alt="Carrinho" />
 				<span className="desktop">Pedidos</span>
@@ -155,8 +151,8 @@ export function Header({ isAdmin }) {
 				style={{ display: isMobile ? "none" : "block" }}
 				checked={theme === "light"}
 				onChange={toggleTheme}
-					moonColor="#FFFAF1"
-					sunColor="#FFFAF1"
+				moonColor="#FFFAF1"
+				sunColor="#FFFAF1"
 				size={80}
 			/>
 		</Container>

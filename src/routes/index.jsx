@@ -5,10 +5,8 @@ import { AuthRoutes } from "./auth.routes";
 
 export function AnimatedRoutes() {
 	const { user } = useAuth();
-	
+
 	return (
-		<AnimatePresence>
-			{user ? <AppRoutes /> : <AuthRoutes />}
-		</AnimatePresence>
+		<AnimatePresence>{user ? <AppRoutes /> : <AuthRoutes />}</AnimatePresence>
 	);
 }

@@ -1,12 +1,9 @@
-import { useNavigate } from "react-router-dom";
-
-import { Container } from "./styles.js";
-
-import { api } from "../../services/api";
-
 import { useEffect, useState } from "react";
 import { SlMagnifier } from "react-icons/sl";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { api } from "../../services/api";
+import { Container } from "./styles.js";
 
 export function InputSearch({ placeholder, setOpen }) {
 	const [searchTerm, setSearchTerm] = useState(""); // Estado para armazenar o termo de busca
@@ -74,7 +71,11 @@ export function InputSearch({ placeholder, setOpen }) {
 				{searchResults.length > 0 && (
 					<ul className="search-results">
 						{searchResults.map((dish, index) => (
-							<li key={`${dish.id}+${index}`} onClick={() => handleResultClick(dish.id)} onKeyDown={() => handleResultClick(dish.id)} >
+							<li
+								key={`${dish.id}+${index}`}
+								onClick={() => handleResultClick(dish.id)}
+								onKeyDown={() => handleResultClick(dish.id)}
+							>
 								<div>
 									<span>{dish.name}</span>
 								</div>

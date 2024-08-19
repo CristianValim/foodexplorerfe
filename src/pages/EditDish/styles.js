@@ -4,9 +4,8 @@ import Select_down from "../../assets/icons/Select_down.svg";
 export const Container = styled.div`
   font-family: ${({ theme }) => theme.FONTS.SECONDARY};
   color: ${({ theme }) => theme.COLORS.FONT_400};
-
-  min-height: 85dvh;
-  padding-bottom: 5.3rem;
+  min-height: calc(100svh - 22rem);
+  padding: 2rem 0 5.3rem;
   margin-inline: 10%;
 
   h1 {

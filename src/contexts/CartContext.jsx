@@ -1,51 +1,87 @@
-// 1. Bibliotecas externas
-import { createContext, useState, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-// 2. Criação do contexto do carrinho
 const CartContext = createContext();
 
-// 3. Componente CartProvider
 export function CartProvider({ children }) {
-	const [cart, setCart] = useState([]); // Estado para armazenar os itens do carrinho
+	const [cart, setCart] = useState(() => {
+		const savedCart = localStorage.getItem("cart");
+		return savedCart ? JSON.parse(savedCart) : [];
+	});
 
-	// Função para adicionar item ao carrinho
-	const addToCart = (item) => {
+	function addToCart(item) {
 		setCart((prevCart) => {
-			// Verifica se o item já existe no carrinho
 			const existingItemIndex = prevCart.findIndex(
 				(cartItem) => cartItem.id === item.id,
 			);
 
 			if (existingItemIndex > -1) {
-				// Caso o item já exista, cria uma cópia do carrinho atual
 				const updatedCart = [...prevCart];
-
-				// Atualiza a quantidade do item existente
 				updatedCart[existingItemIndex] = {
 					...updatedCart[existingItemIndex],
 					quantity: updatedCart[existingItemIndex].quantity + item.quantity,
 				};
-
-				// Retorna o carrinho atualizado
 				return updatedCart;
-			} else {
-				// Caso o item não exista, adiciona o novo item ao carrinho
-				return [...prevCart, item];
 			}
+			return [...prevCart, item];
+		});
+	}
+
+	const updateItemQuantity = (id, quantity) => {
+		setCart((prevCart) =>
+			prevCart.map((item) => (item.id === id ? { ...item, quantity } : item)),
+		);
+	};
+
+	const increaseQuantity = (id) => {
+		setCart((prevCart) =>
+			prevCart.map((item) =>
+				item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+			),
+		);
+	};
+
+	const decreaseQuantity = (id) => {
+		setCart((prevCart) => {
+			const itemIndex = prevCart.findIndex((item) => item.id === id);
+			if (itemIndex > -1) {
+				const item = prevCart[itemIndex];
+				if (item.quantity > 1) {
+					return prevCart.map((i, index) =>
+						index === itemIndex ? { ...i, quantity: i.quantity - 1 } : i,
+					);
+				}
+				return prevCart.filter((item) => item.id !== id);
+			}
+			return prevCart;
 		});
 	};
 
-	// Função para obter a contagem total de itens no carrinho
-	const getCartItemCount = () => {
-		return cart.reduce((total, item) => total + item.quantity, 0);
+	const removeFromCart = (id) => {
+		setCart((prevCart) => prevCart.filter((item) => item.id !== id));
 	};
 
+	function getCartItemCount() {
+		return cart.reduce((total, item) => total + item.quantity, 0);
+	}
+
+	useEffect(() => {
+		localStorage.setItem("cart", JSON.stringify(cart));
+	}, [cart]);
+
 	return (
-		<CartContext.Provider value={{ cart, addToCart, getCartItemCount }}>
+		<CartContext.Provider
+			value={{
+				cart,
+				addToCart,
+				getCartItemCount,
+				increaseQuantity,
+				decreaseQuantity,
+				removeFromCart,
+			}}
+		>
 			{children}
 		</CartContext.Provider>
 	);
 }
 
-// 4. Hook personalizado para usar o contexto do carrinho
 export const useCart = () => useContext(CartContext);

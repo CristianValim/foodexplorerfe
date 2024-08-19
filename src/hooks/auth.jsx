@@ -1,10 +1,7 @@
-// 1. Bibliotecas externas
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// 2. Utilitarios e helpers
 import { api } from "../services/api";
 
-// 3. Criação do contexto de autenticação
 export const AuthContext = createContext({});
 
 // Componente AuthProvider
@@ -80,7 +77,7 @@ function AuthProvider({ children }) {
 		const token = localStorage.getItem("@FoodExplorer:token"); // Obtém o token do localStorage
 
 		if (user && token) {
-			api.defaults.headers.common["Authorization"] = `Bearer ${token}`; // Define o token como padrão nas requisições
+			api.defaults.headers.common.Authorization = `Bearer ${token}`; // Define o token como padrão nas requisições
 
 			setData({
 				token,

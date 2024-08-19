@@ -1,4 +1,4 @@
-import { Container } from "./styles.js"; // Importa o componente de estilo Container
+import { Container } from "./styles.js";
 
 // Componente Button que recebe as props: name, img, onClick e toDelete
 export function Button({ name, img, onClick, toDelete }) {

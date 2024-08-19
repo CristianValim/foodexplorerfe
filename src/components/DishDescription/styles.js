@@ -8,6 +8,7 @@ export const Container = styled.div`
   font-size: 1.4rem;
   display: grid;
   place-content: center;
+  min-height: calc(100svh - 22rem);
 
   // Estilização da imagem do prato
   .dishPicture {

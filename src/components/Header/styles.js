@@ -4,7 +4,7 @@ export const Container = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 11.4rem;
+  height: 12rem;
   padding-top: 4.2rem;
   padding-inline: 1.6rem;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
@@ -72,7 +72,7 @@ export const Container = styled.header`
   }
 
   @media (min-width: 600px) {
-    min-height: 10.4rem;
+    min-height: 10rem;
     justify-content: center;
     align-items: center;
     gap: 3rem;
