@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: relative;
-  z-index: 9999;
+  z-index: 2000;
 
   .searchIcon {
     position: absolute;

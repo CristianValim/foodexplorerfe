@@ -97,6 +97,7 @@ export function Header({ isAdmin }) {
 				<InputSearch />
 			</div>
 			<button
+				id="cartIcon"
 				type="button"
 				className="cart"
 				style={{ display: isAdmin ? "none" : isMobile ? "grid" : "flex" }}

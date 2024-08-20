@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { motion } from "framer-motion";
 import debounce from "lodash.debounce";
 import { Link, useNavigate } from "react-router-dom";
 import heart from "../../assets/icons/Heart.svg";
@@ -15,18 +17,17 @@ import { QuantitySelector } from "../QuantitySelector";
 import { Container } from "./styles";
 
 export function DishCard({ id, image, description, price, dish }) {
-	// Estado para controlar o favorito e a quantidade
 	const [isActive, setIsActive] = useState(false);
 	const [quantity, setQuantity] = useState(1);
 	const [loading, setLoading] = useState(false);
+	const [isAnimating, setIsAnimating] = useState(false);
+	const [animationProps, setAnimationProps] = useState({});
 
-	// Obtendo informações de autenticação e navegação
 	const { isAdmin, addToFavorites, user } = useAuth();
 	const navigate = useNavigate();
 	const isMobile = useIsMobile();
 	const { addToCart } = useCart();
 
-	// Função para alternar estado de favorito
 	const handleFavorite = async () => {
 		setLoading(true);
 		const wasFavorite = isActive;
@@ -53,26 +54,55 @@ export function DishCard({ id, image, description, price, dish }) {
 					setIsActive(isFavorite);
 				}
 			} catch (error) {
-				toast.error("Erro ao buscar favoritos");
+				console.error("Erro ao buscar favoritos");
 			}
 		};
 
 		fetchFavorites();
 	}, [id, user]);
 
-	// Função para navegar para a página de edição
 	function handleNavigate() {
 		navigate(`/dishes/editdish/${id}`);
 	}
 
-	// Função debounced para adicionar ao carrinho
 	const debounceAddToCart = debounce((params) => {
 		addToCart(params);
 	}, 50);
 
-	// Função para lidar com a adição ao carrinho
 	function handleAddToCart() {
-		debounceAddToCart({ id, image, description, price, dish, quantity });
+		const img = document.querySelector(`#dish-image-${id}`);
+		const cartIcon = document.querySelector("#cartIcon");
+
+		const imgRect = img.getBoundingClientRect();
+		const cartRect = cartIcon.getBoundingClientRect();
+
+		setAnimationProps({
+			initial: {
+				top: imgRect.top,
+				left: imgRect.left,
+				width: imgRect.width,
+				height: imgRect.height,
+				opacity: 1,
+			},
+			animate: {
+				top: cartRect.top,
+				left: cartRect.left,
+				width: 30,
+				height: 30,
+				opacity: 0.5,
+			},
+			transition: {
+				duration: 0.75,
+				ease: "easeInOut",
+			},
+		});
+
+		setIsAnimating(true);
+
+		setTimeout(() => {
+			debounceAddToCart({ id, image, description, price, dish, quantity });
+			setIsAnimating(false);
+		}, 750);
 	}
 
 	return (
@@ -100,7 +130,29 @@ export function DishCard({ id, image, description, price, dish }) {
 			{/* Imagem do prato e link para detalhes */}
 			<figure>
 				<Link className="image" to={`/dishes/${id}`}>
+					{isAnimating &&
+						createPortal(
+							<motion.div
+								initial={animationProps.initial}
+								animate={animationProps.animate}
+								transition={animationProps.transition}
+								style={{
+									position: "fixed",
+									zIndex: 9999,
+								}}
+							>
+								<LazyLoadImage
+									id={`dish-image-${id}`}
+									src={image}
+									alt={description}
+									width="100%"
+									height="100%"
+								/>
+							</motion.div>,
+							document.getElementById("animation-root"),
+						)}
 					<LazyLoadImage
+						id={`dish-image-${id}`}
 						src={image}
 						alt={description}
 						loading="lazy"
