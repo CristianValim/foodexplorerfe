@@ -12,6 +12,8 @@ Projeto final da [Rocketseat](rocketseat.com.br) (escola de programação), o Fo
 - **Pesquisar Pratos:** Permite ao usuário pesquisar por pratos disponíveis no restaurante.
 - **Escolher Quantidade:** Permite selecionar a quantidade de cada prato.
 - **Adicionar ao Carrinho:** Adiciona os pratos selecionados ao carrinho de compras.
+- **Visualizar Carrinho de Compras:** Exibe todos os itens que o usuário adicionou ao carrinho.
+- **Remover Itens do Carrinho:** Permite ao usuário remover pratos do carrinho de compras.
 - **Adicionar aos Favoritos:** Permite ao usuário marcar pratos como favoritos para acesso rápido.
 
 ### Administrador
@@ -22,30 +24,29 @@ Projeto final da [Rocketseat](rocketseat.com.br) (escola de programação), o Fo
 ### Geral
 - **Toggle de Dark e Light Mode:** Permite alternar entre os modos claro e escuro, ajustando a interface para a preferência do usuário. O modo inicial é determinado automaticamente com base na preferência de tema do sistema operacional do usuário, garantindo uma experiência mais personalizada desde o primeiro acesso.
 
-## Funcionalidades futuras
-
-- **Carrinho de compras:** Carrinho com itens selecionados para gerir o pedido.
-- **Métodos de pagamento:** Tela com métodos de pagamento disponível.
-
 ## Tecnologias Utilizadas
 
 - **ReactJS**
-- **Axios** (`^1.7.2`)
-- **Framer Motion** (`^11.1.5`)
-- **Hamburger React** (`^2.5.0`)
-- **Lodash Debounce** (`^4.0.8`)
-- **React Confirm Alert** (`^3.0.6`)
-- **React Currency Input Field** (`^3.8.0`)
-- **React Icons** (`^5.1.0`)
-- **React Router DOM** (`^6.23.0`)
-- **React Select** (`^5.8.0`)
-- **React Spinners** (`^0.14.1`)
-- **React Switch** (`^7.0.0`)
-- **React Toastify** (`^10.0.5`)
-- **React Tooltip** (`^5.27.1`)
-- **Styled Components** (`^6.1.8`)
-- **Swiper** (`^11.1.1`)
-- **React Toggle Dark Mode** (`^1.1.1`)
+- **Axios:** `^1.7.3`
+- **Framer-motion:** `^11.3.22`
+- **Hamburger-react:** `^2.5.1`
+- **Lodash.debounce:** `^4.0.8`
+- **React:** `^18.3.1`
+- **React-confirm-alert:** `^3.0.6`
+- **React-currency-input-field:** `^3.8.0`
+- **React-dom:** `^18.3.1`
+- **React-icons:** `^5.2.1`
+- **React-lazy-load-image-component:** `^1.6.2`
+- **React-router-dom:** `^6.26.0`
+- **React-select:** `^5.8.0`
+- **React-spinners:** `^0.14.1`
+- **React-switch:** `^7.0.0`
+- **React-toastify:** `^10.0.5`
+- **React-toggle-dark-mode:** `^1.1.1`
+- **React-tooltip:** `^5.28.0`
+- **Styled-components:** `^6.1.12`
+- **Swiper:** `^11.1.9`
+
 
 ## Como Usar
 
@@ -56,6 +57,7 @@ Projeto final da [Rocketseat](rocketseat.com.br) (escola de programação), o Fo
    - Como admin: Utilize o toggle disponível na interface para alternar entre os modos de usuário e administrador. Adicione, edite ou remova pratos conforme necessário.
    - Utilize o **Toggle de Dark e Light Mode** para ajustar a interface ao seu gosto.
    - Adicione pratos aos **Favoritos** e acesse-os facilmente na aba de favoritos.
+   - Acesse o **Carrinho de Compras** para revisar os itens adicionados e finalizar o pedido.
 
 ## Documentação da API
 
