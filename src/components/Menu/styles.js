@@ -13,7 +13,7 @@ export const Container = styled.section`
     align-items: center;
     background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
     font-family: ${({ theme }) => theme.FONTS.SECONDARY};
-    min-height: 11.4rem;
+    min-height: 12rem;
     padding-top: 4.2rem;
     padding-inline: 1.6rem;
     font-size: 2.1rem;
